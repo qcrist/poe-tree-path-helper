@@ -29,8 +29,9 @@ export function SelectedNodes() {
 
     useEffect(() => {
         return subscribeAndRunNow(({selection, pathNodes}) => {
-            const root_count = iter_count(selection.values().filter(x => x == SelectionType.ROOT));
-            const sel_count = iter_count(selection.values().filter(x => x == SelectionType.DIRECT));
+            const sel = [...selection.values()];
+            const root_count = sel.filter(x => x == SelectionType.ROOT).length;
+            const sel_count = sel.filter(x => x == SelectionType.DIRECT).length;
             pathedRef.current!.innerText = String(pathNodes.size - root_count);
             selectedRef.current!.innerText = String(sel_count);
         });
