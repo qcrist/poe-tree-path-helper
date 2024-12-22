@@ -4,6 +4,7 @@ import {ResetSelection} from "#src/ui/components/ResetSelection";
 import {SearchBox} from "#src/ui/components/SearchBox";
 import {Tooltip} from "#src/ui/components/Tooltip";
 import {Help} from "#src/ui/components/Help";
+import {ProgressBar} from "#src/ui/components/Progress";
 
 export function RootFrame() {
     return <>
@@ -12,5 +13,6 @@ export function RootFrame() {
         <SearchBox/>
         <Tooltip/>
         <Help/>
+        <ProgressBar/>
     </>;
 }

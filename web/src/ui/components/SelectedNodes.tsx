@@ -9,7 +9,7 @@ const SelectedNodeContainer = styled.div`
     user-select: none;
 `;
 
-const SelectedNodeBox = styled.div`
+export const DecoratedBox = styled.div`
     display: inline-block;
     border: 1px solid rgb(175, 96, 37);
     background: rgb(100, 54, 22);
@@ -39,9 +39,9 @@ export function SelectedNodes() {
 
     return <SelectedNodeContainer>
         <span>
-            <SelectedNodeBox>Nodes</SelectedNodeBox>
-            <SelectedNodeBox>Selected <span ref={selectedRef}>##</span></SelectedNodeBox>
-            <SelectedNodeBox>Pathed <span ref={pathedRef}>##</span></SelectedNodeBox>
+            <DecoratedBox>Nodes</DecoratedBox>
+            <DecoratedBox>Selected <span ref={selectedRef}>##</span></DecoratedBox>
+            <DecoratedBox>Pathed <span ref={pathedRef}>##</span></DecoratedBox>
         </span>
     </SelectedNodeContainer>;
 }

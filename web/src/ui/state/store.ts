@@ -1,6 +1,7 @@
 import {createStore, StateCreator} from "zustand";
 import {Draft, Immutable, produce} from "immer";
 import {Application, Container} from "pixi.js";
+import {ProgressBarCallback} from "#src/ui/components/Progress";
 
 export const enum SelectionType {
     DIRECT,
@@ -24,6 +25,7 @@ export type StoreType = {
     pathNodes: Set<number>,
     search: string;
     tooltip: TooltipData | null,
+    progress_fn: ProgressBarCallback | null,
     // stageUpdated(app: Application): void;
     toggleNode(id: number, type: SelectionType): void;
     setNode(id: number, type: SelectionType): void;
@@ -32,6 +34,7 @@ export type StoreType = {
     clearSelection(): void;
     setSearch(text: string): void;
     setTooltip(data: TooltipData | null): void;
+    setProgressFunction(fn: ProgressBarCallback | null): void;
 }
 
 type JSONSerializable = number | string | JSONSerializable[] | JSONSerializableDict;
@@ -136,6 +139,7 @@ const initStore: StateCreator<Immutable<StoreType>> = (set_raw, get) => {
         tooltip: null,
         selection: new Map(),
         pathNodes: new Set(),
+        progress_fn: null,
         // stageUpdated(app: Application): void {
         //     set(state => {
         //         const {stage, screen} = app;
@@ -182,6 +186,11 @@ const initStore: StateCreator<Immutable<StoreType>> = (set_raw, get) => {
         setTooltip(tooltip: TooltipData | null) {
             set(state => {
                 state.tooltip = tooltip;
+            });
+        },
+        setProgressFunction(fn: ProgressBarCallback) {
+            set(state => {
+                state.progress_fn = fn;
             });
         }
     };

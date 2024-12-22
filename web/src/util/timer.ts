@@ -1,10 +1,10 @@
 export type TimerObj = {
     finished(): void;
-    print_current_dt(name: string): void;
+    print_current_dt(name: named): void;
     timeFn<T, A extends any[]>(run: (...a: A) => T, ...a: A): T;
-    time<T>(name: string, run: (timer: TimerObj) => T): T;
+    time<T>(name: named, run: (timer: TimerObj) => T): T;
     timeFnAsync<T, A extends any[]>(run: (...a: A) => Promise<T>, ...a: A): Promise<T>;
-    timeAsync<T>(name: string, run: (timer: TimerObj) => Promise<T>): Promise<T>;
+    timeAsync<T>(name: named, run: (timer: TimerObj) => Promise<T>): Promise<T>;
 };
 
 function chkName(fn: Function) {

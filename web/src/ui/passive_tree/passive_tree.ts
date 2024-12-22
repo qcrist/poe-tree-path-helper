@@ -378,6 +378,8 @@ export async function init_tree() {
             }
         });
         container.on("rightdown", e => {
+            if (p.isRootNode)
+                return;
             store.getState().toggleNode(p.id, SelectionType.BLOCK);
         });
         container.on("mouseenter", e => {
@@ -450,6 +452,7 @@ export async function init_tree() {
     (function setup_solver() {
         let last: null | ReadonlyMap<number, SelectionType> = null;
         let last_solve_abort: null | (() => void) = null;
+        let next_id = 0;
         subscribeAndRunNow(async state => {
             //todo implement and use subscribeAndRunNowWithSelector (and in other places) :O!
             const next = state.selection;
@@ -472,12 +475,25 @@ export async function init_tree() {
                 aborted_during_await = true;
             };
 
+            const id = next_id++;
+            let best_solve = Infinity;
+
             let cancel_solve = await solver.solve({
                 required: selected,
-                blocked: blocked
+                blocked: blocked,
+                id
             }, proxy(update => {
-                console.log("solve update", update);
-                state.updatePathNodes(update.best.map(x => graph.node_ids[x]));
+                if (update.id !== id) return; //TODO not sure if this can happen
+                if (update.best.length < best_solve) {
+                    best_solve = update.best.length;
+                    console.log("solve update", update);
+                    state.updatePathNodes(update.best.map(x => graph.node_ids[x]));
+                }
+                const pct = (update.part_progress / update.part_count) + update.total_progress;
+                store.getState().progress_fn?.({
+                    finished: update.finished,
+                    progress: pct / update.total_count
+                });
             }));
 
             if (aborted_during_await) {

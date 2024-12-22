@@ -2,6 +2,7 @@ import {time, timeAsync, TimerObj} from "#src/util/timer";
 import {handleErrors} from "#src/util/async";
 import {proxy} from "comlink";
 import type {BenchmarkData} from "#src/solver/benchmark";
+import {ProgressBarCallback} from "#src/ui/components/Progress";
 
 export async function run_benchmark_js(benchmark_data: BenchmarkData) {
     const conn = benchmark_data.tree.map(x => new Uint16Array(x));
@@ -43,8 +44,13 @@ export async function run_benchmark_js(benchmark_data: BenchmarkData) {
 }
 
 export type solve_progress_fn = (data: {
+    id: number,
     finished: boolean,
-    best: number[]
+    best: number[],
+    part_progress: number,
+    part_count: number,
+    total_progress: number,
+    total_count: number
 }) => void;
 
 export type solve_cancel_fn = () => void;
@@ -53,9 +59,9 @@ type abort_obj = {
 }
 
 type solve_req = {
+    id: number,
     required: number[],
     blocked: number[],
-    // optional: number[]
 }
 
 export class TreeSolver {
@@ -92,16 +98,23 @@ export class TreeSolver {
         handleErrors((async () => {
             const s = new Uint16Array(solve.required);
 
-            const result = await timeAsync("solve_random_2", t => solve_random_2(conn, s, [
+            const result = await timeAsync(solve_random_2, t => solve_random_2(conn, s, [
                 {acc: 0, cap: 200},
+                {acc: 1, cap: 1000},
                 {acc: 2, cap: 5000}
-            ], callback, abort, t));
+            ], callback, abort, t, solve));
 
-            if (!abort.abort)
+            if (!abort.abort) {
                 callback({
                     finished: true,
-                    best: [...result]
+                    best: [...result],
+                    part_count: 0,
+                    part_progress: 0,
+                    total_progress: 0,
+                    total_count: 0,
+                    id: solve.id
                 });
+            }
         })());
         return proxy(() => {
             abort.abort = true;
@@ -112,12 +125,12 @@ export class TreeSolver {
 
 const yield_channel = new MessageChannel();
 const yield_listeners: (() => void)[] = [];
-yield_channel.port2.onmessage = ()=>{
+yield_channel.port2.onmessage = () => {
     for (let l of yield_listeners) {
         l();
     }
     yield_listeners.length = 0;
-}
+};
 
 async function yield_to_event_loop() {
     const p = new Promise<void>(cb => {
@@ -238,7 +251,8 @@ type solve_params = {
 //acc=2, cap=5000 is very good (and slow)
 async function solve_random_2(conn: Uint16Array[], sel: Uint16Array,
                               params: solve_params[],
-                              callback?: solve_progress_fn, abort?: abort_obj, timer?: TimerObj): Promise<Uint16Array> {
+                              callback: solve_progress_fn, abort: abort_obj, timer: TimerObj,
+                              solve: solve_req): Promise<Uint16Array> {
     // dist: Int8Array[],
     let min_callback_length = Infinity;
     if (sel.length == 0) return EMPTY_U16;
@@ -278,15 +292,20 @@ async function solve_random_2(conn: Uint16Array[], sel: Uint16Array,
         return arr1[b] = paths_part(conn, dist[b], a, b);
     }
 
-    function do_callback() {
+    function do_callback(params_at: number, sub_at: number, sub_count: number) {
         if (abort?.abort) return;
-        if (minPath.value.length <= (min_callback_length ?? 1E99)) {
-            callback?.({
-                finished: false,
-                best: [...minPath.value]
-            });
-            min_callback_length = minPath.value.length - 1;
-        }
+        // if (minPath.value.length <= (min_callback_length ?? 1E99)) {
+        callback?.({
+            finished: false,
+            best: [...minPath.value],
+            id: solve.id,
+            total_count: params.length,
+            total_progress: params_at,
+            part_progress: sub_at,
+            part_count: sub_count
+        });
+        min_callback_length = minPath.value.length - 1;
+        // }
     }
 
     // let finished = false;
@@ -321,7 +340,8 @@ async function solve_random_2(conn: Uint16Array[], sel: Uint16Array,
 
         let seed = rng(Date.now());
 
-        for (const a of steiner_nodes) {
+        for (let s = 0; s < steiner_nodes.length; s++) {
+            const a = steiner_nodes[s];
             await yield_to_event_loop();
             if (abort?.abort) {
                 console.debug("aborted solve");
@@ -334,7 +354,7 @@ async function solve_random_2(conn: Uint16Array[], sel: Uint16Array,
                 if (at++ >= 10000) {
                     //todo time how long this triggers
                     await yield_to_event_loop();
-                    do_callback();
+                    do_callback(i, s, steiner_nodes.length);
                     at = 0;
                 }
 
@@ -378,7 +398,7 @@ async function solve_random_2(conn: Uint16Array[], sel: Uint16Array,
             }
         }
 
-        do_callback();
+        do_callback(i, steiner_nodes.length - 1, steiner_nodes.length);
     }
 
     // finished = true;

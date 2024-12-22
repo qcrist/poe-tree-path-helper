@@ -29,12 +29,16 @@ const HelpParagraph = styled.span`
 `;
 
 
+const HELP_DISMISSED = "did-dismiss-help";
+
 export function Help() {
-    const [showHelp, setShowHelp] = useState<boolean>(true);
+    const [showHelp, setShowHelp] = useState<boolean>(
+        localStorage.getItem(HELP_DISMISSED) !== HELP_DISMISSED);
 
     return <HelpWrapper>
         <StyledButton onClick={_ => {
             setShowHelp(!showHelp);
+            localStorage.setItem(HELP_DISMISSED, HELP_DISMISSED);
         }}>Toggle Help</StyledButton>
         {showHelp && <HelpContainer>
             <div>
