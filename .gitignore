@@ -10,7 +10,6 @@ out/
 .DS_Store
 
 binary_wip/
-data-extract
 node_modules
 out
 dist-dev
