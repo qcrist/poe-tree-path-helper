@@ -59,7 +59,7 @@ public class LoadSkillTree {
 
     public static void main(String[] args) throws IOException, MagickException {
         Path ggpk = Path.of("G:\\Path of Exile 2\\Content.ggpk");
-        Path output = Path.of("data-extract");
+        Path output = Path.of("dist");
         Files.createDirectories(output);
 
         GGPK gg = new GGPK(ggpk);
