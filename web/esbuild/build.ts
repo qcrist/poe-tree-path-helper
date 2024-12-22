@@ -1,6 +1,5 @@
 import * as esbuild from 'esbuild';
-import wasmLoader from "esbuild-plugin-wasm";
-import {BuildOptions} from "esbuild";
+import {BuildOptions} from 'esbuild';
 import * as path from "node:path";
 import {handleErrors} from "../src/util/async";
 import {build_data_t, packHTML} from "./pack";
@@ -64,7 +63,7 @@ async function main() {
                             handleErrors(ctx.rebuild());
                         }, 100);
                     else {
-                        packHTML(build_data);
+                        packHTML(build_data, production);
                         on_clean_build();
                     }
                     console.log("built!", should_rebuild);

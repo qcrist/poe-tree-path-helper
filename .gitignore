@@ -13,7 +13,7 @@ binary_wip/
 data-extract
 node_modules
 out
-dist
+dist-dev
 
 base_types.json
 base_types.ts

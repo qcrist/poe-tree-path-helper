@@ -15,7 +15,7 @@ function asString(data: build_data_t, p: string) {
     return {__html: decoder.decode(read.data)};
 }
 
-export function packHTML(data: build_data_t) {
+export function packHTML(data: build_data_t, is_production: boolean) {
     console.log(Object.keys(data));
     const html = <React.Fragment>
         <html lang="en">
@@ -30,7 +30,7 @@ export function packHTML(data: build_data_t) {
         </body>
         </html>
     </React.Fragment>;
-    const output_dir = "dist";
+    const output_dir = "dist" + (is_production ? "" : "-dev");
     if (!fs.existsSync(output_dir)) fs.mkdirSync(output_dir);
     const rendered = "<!doctype html>" + ReactDOMServer.renderToString(html);
     fs.writeFileSync(path.join(output_dir, "index.html"), rendered);

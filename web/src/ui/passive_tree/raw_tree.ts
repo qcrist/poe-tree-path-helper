@@ -1,4 +1,4 @@
-import {Assets, Texture} from "pixi.js";
+import {Assets} from "pixi.js";
 
 export type passive_tree_json_node = {
     id: number,
@@ -44,14 +44,14 @@ export type passive_tree_json_type = {
 // import loadTreeIconsData from "#data/art-extract-default.json";
 
 export async function loadTree(): Promise<passive_tree_json_type> {
-    const f = await fetch("/data-extract/tree-export-default.json");
+    const f = await fetch("tree-export-default.json");
     return await f.json() as passive_tree_json_type;
     // return loadTreeData as passive_tree_json_type;
 }
 
 
 export async function loadTreeIcons() {
-    const resp = await fetch("/data-extract/art-extract-default.json");
+    const resp = await fetch("art-extract-default.json");
     const tree_raw_images = await resp.json();
     // const tree_raw_images = loadTreeIconsData;
 
