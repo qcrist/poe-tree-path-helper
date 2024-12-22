@@ -1,0 +1,1 @@
+export  type Brand<K, T extends string> = K & { [key in `__brand_${T}`]: [T, K] }

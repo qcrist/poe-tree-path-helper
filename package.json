@@ -1,0 +1,32 @@
+{
+    "name": "poe-view",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "pack-development": "tsx --tsconfig web/esbuild/tsconfig.json web/esbuild/build.ts",
+        "pack-production": "tsx --tsconfig web/esbuild/tsconfig.json web/esbuild/build.ts production",
+        "convert-dds-to-png": "tsx --tsconfig web/esbuild/tsconfig.json web/src/convert_dds_images_to_png.mts"
+    },
+    "dependencies": {
+        "@fortawesome/free-regular-svg-icons": "^6.5.2",
+        "@fortawesome/free-solid-svg-icons": "^6.5.2",
+        "@fortawesome/react-fontawesome": "^0.2.2",
+        "comlink": "^4.4.2",
+        "electron": "^31.2.1",
+        "immer": "^10.1.1",
+        "magickwand.js": "^2.0.1",
+        "pixi.js": "^8.6.3",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "styled-components": "^6.1.11",
+        "ts-node": "^10.9.2",
+        "zustand": "^4.5.4"
+    },
+    "devDependencies": {
+        "@types/react-dom": "^18.3.0",
+        "esbuild": "^0.23.0",
+        "esbuild-plugin-wasm": "^1.1.0",
+        "tsx": "^4.19.2",
+        "typescript": "^5.5.3"
+    }
+}

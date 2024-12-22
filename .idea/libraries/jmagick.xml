@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="jmagick" type="repository">
+    <properties maven-id="jmagick:jmagick:6.6.9" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/jmagick/jmagick/6.6.9/jmagick-6.6.9.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/jmagick/jmagick/6.6.9/jmagick-6.6.9-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "target": "ESNext",
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "alwaysStrict": true,
+        "strict": true,
+        "jsx": "react",
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "baseUrl": ".",
+        "paths": {
+            "#src/*": [
+                "./*"
+            ],
+            "#data/*": [
+                "../../data-extract/*"
+            ]
+            //            "#poe-tree-solver/*": [
+            //                "F:\\Projects\\RustRoverProjects\\poe-tree-solver\\pkg\\*"
+            //            ]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "build.ts"
+    ]
+}

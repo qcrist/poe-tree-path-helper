@@ -1,0 +1,74 @@
+//------------------------------------------------
+//--- 010 Editor v15.0.1 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+typedef byte SHA256Hash[32]<format=hex>;
+
+
+struct Entry(uint64 offset){
+//    FSeek(offset);
+    uint32 Length;
+    char Tag[4];
+};
+
+struct GPPKEntryDirectoryEntry {
+    int32 entryNameHash;
+    uint64 offset;
+};
+
+struct GPPKEntry;
+
+void parseGGPKEntries(uint64 entries[], uint32 count){
+    local int i;
+    for (i=0;i<count;i++){
+        GPPKEntry entry(entries[i]);
+    }
+}
+
+struct GPPKEntry(uint64 offset){
+    local uint64 start = FTell();
+ //   Printf("jump_to=%Lu, return_to=%Lu\n", offset, start);
+    FSeek(offset);
+    uint32 length;
+    char tag[4];
+    if (tag == "FREE"){
+        byte data[length - 8];
+    } else if (tag == "PDIR"){
+        uint32 NameLength;
+        uint32 TotalEntries;
+        SHA256Hash hash;
+        wchar_t Name[NameLength];
+        GPPKEntryDirectoryEntry entries[TotalEntries]<hidden=true>;
+        local int i=0;
+        for (i=0;i<TotalEntries;i++){
+            GPPKEntry entry(entries[i].offset);
+        }
+    }else if (tag == "FILE"){
+        uint32 NameLength;
+        SHA256Hash hash;
+        wchar_t Name[NameLength];
+//        byte[reminder] Data;
+    }
+    FSeek(start);
+//    Printf("return to=%Lu\n", start);
+};
+
+struct GGPK {
+    uint32 length;
+    char tag[4]; // ="GGPK"
+    Assert(tag == "GGPK");
+    uint32 version;
+    Assert(version == 3);
+    uint64 entries[2]<hidden=true>;
+//    Entry z(entries[0]);
+    parseGGPKEntries(entries, 2);
+} gppk;

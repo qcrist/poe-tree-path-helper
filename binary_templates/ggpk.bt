@@ -1,0 +1,32 @@
+//------------------------------------------------
+//--- 010 Editor v15.0.1 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+uint32 uncompressed_size;
+uint32 total_payload_size;
+uint32 head_payload_size;
+struct head_payload_t {
+    enum <uint32> {Kraken_6 = 8, Mermaid_A = 9, Leviathan_C = 13 } first_file_encode;
+    uint32 unk10;
+    uint64 uncompressed_size2;
+    uint64 total_payload_size2;
+    uint32 block_count;
+    uint32 uncompressed_block_granularity;
+    uint32 unk28[4];
+    uint32 block_sizes[block_count];
+} head;
+local int i <hidden=true>;
+for (i = 0; i < head.block_count; ++i) {
+    struct block_t {
+        ubyte data[head.block_sizes[i]];
+    } block;
+}

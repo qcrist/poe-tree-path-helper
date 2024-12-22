@@ -1,0 +1,58 @@
+//------------------------------------------------
+//--- 010 Editor v15.0.1 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+uint32 bundle_count;
+struct bundles_t
+{
+    local int i;
+    for (i = 0; i < bundle_count; ++i) {
+        struct {
+            uint32 name_length;
+            char name[name_length];
+            uint32 bundle_uncompressed_size;
+        } bundle_info;
+    }
+} bundles;
+
+uint32 file_count;
+struct files_t
+{
+    local int i;
+    for (i = 0; i < file_count; ++i) {
+        struct {
+            uint64 hash <format=hex>;
+            uint32 bundle_index <comment=BundleIndexComment>;
+            uint32 file_offset;
+            uint32 file_size;
+        } file_info;
+    }
+} files;
+
+string BundleIndexComment(int bundle_index)
+{
+ return bundles.bundle_info[bundle_index].name;
+}
+
+uint32 path_rep_count;
+struct path_rep_t
+{
+    uint64 hash <format=hex>;
+    uint32 payload_offset;
+    uint32 payload_size;
+    uint32 payload_recursive_size;
+} path_rep[path_rep_count];
+
+// The file ends in a nested compressed bundle containing
+// compact representation of all possible paths.
+local int bundle_start = FTell();
+ubyte path_rep_bundle[FileSize() - bundle_start];

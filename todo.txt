@@ -1,0 +1,1 @@
+opt3 is MUCH faster, can I improve the accuracy?

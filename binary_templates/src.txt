@@ -1,0 +1,3 @@
+https://poedb.tw/us/Developer_API
+https://poedb.tw/us/GGPK
+https://github.com/poe-tool-dev/ggpk.discussion/wiki/Bundle-scheme

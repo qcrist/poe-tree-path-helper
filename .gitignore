@@ -1,0 +1,22 @@
+### IntelliJ IDEA ###
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+binary_wip/
+data-extract
+node_modules
+out
+dist
+
+base_types.json
+base_types.ts
+schema.min.json
+
+skill-tree-3.25*.json
