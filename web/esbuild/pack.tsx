@@ -30,9 +30,9 @@ export function packHTML(data: build_data_t, is_production: boolean) {
         </body>
         </html>
     </React.Fragment>;
-    const output_dir = "dist";
-    if (!fs.existsSync(output_dir)) fs.mkdirSync(output_dir);
+    const output_dir = ".";
+    // if (!fs.existsSync(output_dir)) fs.mkdirSync(output_dir);
     const rendered = "<!doctype html>" + ReactDOMServer.renderToString(html);
-    fs.writeFileSync(path.join(output_dir, "index.html" + (is_production ? "" : "-dev")), rendered);
+    fs.writeFileSync(path.join(output_dir, "index" + (is_production ? "" : "-dev") + ".html"), rendered);
 }
 
