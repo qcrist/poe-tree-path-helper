@@ -780,9 +780,8 @@ public class DatTypesV2 {
     }
     public static class BlightCraftingRecipes implements DatType{
         @Offset(0) public String Id; //string
-        @Offset(8) public List<ForeignRow> BlightCraftingItemsKeys; //foreignrow
-        @Offset(24) public ForeignRow BlightCraftingResultsKey; //foreignrow
-        @Offset(40) public ForeignRow BlightCraftingTypesKey; //foreignrow
+        @Offset(8) public ForeignRow BlightCraftingResultsKey; //foreignrow
+        @Offset(24) public List<ForeignRow> BlightCraftingItemsKeys; //foreignrow
     }
     public static class BlightCraftingResults implements DatType{
         @Offset(0) public String Id; //string
@@ -5000,6 +4999,10 @@ public class DatTypesV2 {
         @Offset(0) public ForeignRow SkillGemsKey; //foreignrow
         @Offset(16) public List<ForeignRow> Supports; //foreignrow
     }
+    public static class SkillGemsForUniqueStat implements DatType{
+        @Offset(0) public int id; //i32
+        @Offset(4) public List<ForeignRow> gems; //foreignrow
+    }
     public static class SupportGems implements DatType{
         @Offset(0) public ForeignRow SkillGemsKey; //foreignrow
         @Offset(20) public String Icon; //string
@@ -5883,6 +5886,7 @@ public class DatTypesV2 {
         Words.class,
         WorldAreaLeagueChances.class,
         WorldAreas.class,
-        WorldPopupIconTypes.class
+        WorldPopupIconTypes.class,
+            SkillGemsForUniqueStat.class
     );
 }

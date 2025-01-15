@@ -135,19 +135,9 @@ public class LoadSkillTree {
 //                        throw new Util.DebuggerBreakpoint();
                     DatTypesV2.PassiveSkills lookup = passiveSkillsLookupByGraphId.get(p.id & 0xFFFF);
 
-                    LinkedList<Integer> statValues = new LinkedList<>(List.of(
-                            lookup.Stat1Value,
-                            lookup.Stat2Value,
-                            lookup.Stat3Value,
-                            lookup.Stat4Value,
-                            lookup.Stat5Value
-                    ));
-                    LinkedHashSet<String> statLines = new LinkedHashSet<>();
-                    for (int i = 0; i < lookup.Stats.size(); i++) {
-                        DatTypesV2.Stats stat = lookup.Stats.get(i).lookup(stats);
-                        statLines.addAll(statRenderer.render(stat.Id, statValues));
-                    }
-                    statLines.remove(lookup.Name);
+
+                    List<String> statLines = statsForPassive(lookup, statRenderer, stats);
+
 
 //                    lookup.Sta
 
@@ -244,5 +234,22 @@ public class LoadSkillTree {
 
 
 //        gg.bc.read()
+    }
+
+    public static List<String> statsForPassive(DatTypesV2.PassiveSkills passive, CSD.StatRenderer renderer, List<DatTypesV2.Stats> stats) {
+        LinkedList<Integer> statValues = new LinkedList<>(List.of(
+                passive.Stat1Value,
+                passive.Stat2Value,
+                passive.Stat3Value,
+                passive.Stat4Value,
+                passive.Stat5Value
+        ));
+        LinkedHashSet<String> statLines = new LinkedHashSet<>();
+        for (int i = 0; i < passive.Stats.size(); i++) {
+            DatTypesV2.Stats stat = passive.Stats.get(i).lookup(stats);
+            statLines.addAll(renderer.render(stat.Id, statValues));
+        }
+        statLines.remove(passive.Name);
+        return statLines.stream().toList();
     }
 }

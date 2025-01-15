@@ -17,7 +17,7 @@ public class SearchData {
 
         System.out.println("index.size() = " + gg.index.size());
 
-        String toFindRaw = "MasteryBackgroundGraphic".toLowerCase();
+        String toFindRaw = "WaystoneTier".toLowerCase();
 //        List<byte[]> toFind = new ArrayList<>();
 //        toFind.add()
 

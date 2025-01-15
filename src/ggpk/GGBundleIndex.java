@@ -12,10 +12,7 @@ import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -102,7 +99,7 @@ public class GGBundleIndex {
             }
         }
 
-        Map<String, BundleIndexFile> bundleIndexFiles = new HashMap<>(file_count);
+        Map<String, BundleIndexFile> bundleIndexFiles = new LinkedHashMap<>(file_count);
         for (Map.Entry<Long, BundleIndexFile> e : files.entrySet()) {
             String path = hashSolved.remove(e.getKey());
             if (path == null) {

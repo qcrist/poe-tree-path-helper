@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.*;
 
-public class SearchDataFull {
+public class SearchFull {
     private static final Set<String> ignoredExt = new HashSet<>();
 
     private static boolean shouldInspect(GGPK.File f) {
@@ -36,7 +36,8 @@ public class SearchDataFull {
 
         //find __ALL__ of the below strings
         List<byte[]> search = List.of(
-                "base_dexterity".getBytes(StandardCharsets.UTF_16LE)
+                "SetBorderColor".getBytes(StandardCharsets.UTF_16LE),
+                "SetBorderColor".getBytes(StandardCharsets.US_ASCII)
 //                toFindRaw.getBytes(StandardCharsets.UTF_16LE)
 //                toFindRaw.getBytes(StandardCharsets.UTF_16BE),
 //                toFindRaw.getBytes(StandardCharsets.UTF_8),
@@ -105,10 +106,12 @@ public class SearchDataFull {
         for (byte[] bytes : needle) {
             int find = arrayIndexOf(haystack, bytes);
             if (find == -1)
-                return -1;
+                continue;
             if (first == -2)
                 first = find;
         }
+        if (first == -2)
+            return -1;
         return first;
     }
 

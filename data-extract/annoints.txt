@@ -1,0 +1,75 @@
+cost=3 recipe=[Envy, Envy, Envy] notable=Heavy Drinker desc=20% increased Life Recovery from Flasks | 30% increased Flask Effect Duration | Recover 5% of Life when you use a Life Flask while on Low Life
+cost=3 recipe=[Envy, Envy, Greed] notable=Essence Infusion desc=40% increased Energy Shield Recharge Rate | +10 to Intelligence
+cost=3 recipe=[Envy, Envy, Ire] notable=Smash desc=20% increased Melee Damage | 40% increased Melee Damage against Heavy Stunned enemies
+cost=3 recipe=[Envy, Envy, Paranoia] notable=Dispatch Foes desc=80% increased Critical Hit Chance if you haven't dealt a Critical Hit Recently
+cost=3 recipe=[Envy, Greed, Envy] notable=Ether Flow desc=25% reduced Mana Regeneration Rate while stationary | 50% increased Mana Regeneration Rate while moving
+cost=3 recipe=[Envy, Greed, Greed] notable=Arcane Alchemy desc=Mana Flasks gain 0.1 charges per Second | +10 to Intelligence
+cost=3 recipe=[Envy, Greed, Paranoia] notable=Electrifying Nature desc=25% increased Lightning Damage | 15% increased Shock Duration
+cost=3 recipe=[Envy, Guilt, Envy] notable=Resilient Soul desc=20% increased Life Regeneration rate | 5% of Damage taken Recouped as Life
+cost=3 recipe=[Envy, Guilt, Greed] notable=Thickened Arteries desc=Regenerate 1.0% of Life per second while stationary | 5% reduced Movement Speed
+cost=3 recipe=[Envy, Guilt, Ire] notable=Defiance desc=80% increased Armour and Evasion Rating when on Low Life
+cost=3 recipe=[Envy, Ire, Greed] notable=Taste for Blood desc=Gain 20 Life per Enemy Killed | 2% chance to Recover all Life when you Kill an Enemy
+cost=3 recipe=[Envy, Ire, Guilt] notable=Deadly Flourish desc=20% increased Melee Critical Hit Chance | UNKNOWN STAT: melee_critical_strike_chance_+%_when_on_full_life
+cost=3 recipe=[Envy, Ire, Ire] notable=Deft Recovery desc=30% increased Stun Threshold if you haven't been Stunned Recently | 30% increased Stun Recovery
+cost=3 recipe=[Envy, Ire, Paranoia] notable=Shedding Skin desc=40% increased Elemental Ailment Threshold | 10% reduced Duration of Ailments on You
+cost=3 recipe=[Envy, Paranoia, Envy] notable=Relentless Vindicator desc=10% increased Damage | 10% increased Critical Hit Chance | +5 to Strength and Intelligence
+cost=3 recipe=[Envy, Paranoia, Greed] notable=Exposed Wounds desc=15% increased chance to inflict Ailments | Break 30% increased Armour on enemies affected by Ailments
+cost=3 recipe=[Envy, Paranoia, Guilt] notable=Fear of Death desc=25% increased Minion Accuracy Rating | Minions have +150 to Accuracy Rating
+cost=3 recipe=[Envy, Paranoia, Ire] notable=Critical Exploit desc=25% increased Critical Hit Chance
+cost=3 recipe=[Greed, Envy, Envy] notable=Infused Flesh desc=8% of Damage taken Recouped as Life | +20 to maximum Life
+cost=3 recipe=[Greed, Envy, Paranoia] notable=Warding Potions desc=10% reduced Flask Charges used from Mana Flasks | Remove a Curse when you use a Mana Flask
+cost=3 recipe=[Greed, Greed, Envy] notable=Freedom of Movement desc=30% increased Evasion Rating | 30% increased Evasion Rating if you've Dodge Rolled Recently
+cost=3 recipe=[Greed, Greed, Greed] notable=Life from Death desc=Recover 3% of Life on Kill
+cost=3 recipe=[Greed, Greed, Ire] notable=Backup Plan desc=40% increased Armour if you haven't been Hit Recently | 40% increased Evasion Rating if you have been Hit Recently
+cost=3 recipe=[Greed, Guilt, Envy] notable=Practiced Signs desc=6% increased Cast Speed
+cost=3 recipe=[Greed, Guilt, Greed] notable=Flashy Deflection desc=12% increased Block chance | 40% increased Defences from Equipped Shield
+cost=3 recipe=[Greed, Guilt, Ire] notable=Volatile Catalyst desc=10% increased Cooldown Recovery Rate | 10% increased Area of Effect
+cost=3 recipe=[Greed, Guilt, Paranoia] notable=Battle-hardened desc=20% increased Armour and Evasion Rating | Hits against you have 20% reduced Critical Damage Bonus | +5 to Strength and Dexterity
+cost=3 recipe=[Greed, Ire, Envy] notable=Initiative desc=30% increased Melee Damage when on Full Life | 16% increased Attack Speed if you haven't Attacked Recently
+cost=3 recipe=[Greed, Ire, Ire] notable=Defensive Reflexes desc=12% increased Block chance | 2 Mana gained when you Block
+cost=3 recipe=[Greed, Paranoia, Greed] notable=Killer Instinct desc=30% increased Attack Damage when on Full Life | 50% increased Attack Damage when on Low Life
+cost=3 recipe=[Greed, Paranoia, Guilt] notable=Stand Ground desc=Regenerate 1.0% of Life per second while stationary | Regenerate 1.0% of Life per second while affected by any Damaging Ailment
+cost=3 recipe=[Greed, Paranoia, Ire] notable=Shockwaves desc=30% increased Area of Effect if you've Stunned an Enemy with a Two Handed Melee Weapon Recently
+cost=3 recipe=[Greed, Paranoia, Paranoia] notable=Forcewave desc=20% increased Knockback Distance | 20% increased Stun Buildup | +10 to Strength
+cost=3 recipe=[Guilt, Envy, Greed] notable=Smooth Buckler desc=12% increased Block chance | 10 Mana gained when you Block
+cost=3 recipe=[Guilt, Envy, Guilt] notable=Vigilance desc=12% increased Block chance | 6 Life gained when you Block
+cost=3 recipe=[Guilt, Envy, Ire] notable=Critical Overload desc=15% increased Spell Damage if you've dealt a Critical Hit Recently | 15% increased Critical Hit Chance for Spells
+cost=3 recipe=[Guilt, Greed, Envy] notable=Cross Strike desc=20% increased Accuracy Rating while Dual Wielding | 3% increased Movement Speed while Dual Wielding
+cost=3 recipe=[Guilt, Greed, Greed] notable=Heavy Ammunition desc=40% increased Projectile Stun Buildup | 8% reduced Attack Speed | 40% increased Projectile Damage
+cost=3 recipe=[Guilt, Greed, Guilt] notable=Hard to Kill desc=Regenerate 0.75% of Life per second | 40% increased Flask Life Recovery rate
+cost=3 recipe=[Guilt, Greed, Ire] notable=Combat Alchemy desc=20% increased Life and Mana Recovery from Flasks | 10% chance for Flasks you use to not consume Charges
+cost=3 recipe=[Guilt, Greed, Paranoia] notable=Primal Protection desc=25% increased Charm Charges gained | 25% increased Charm Effect Duration
+cost=3 recipe=[Guilt, Guilt, Ire] notable=Open Mind desc=25% increased Mana Regeneration Rate
+cost=3 recipe=[Guilt, Guilt, Paranoia] notable=Careful Aim desc=16% increased Projectile Damage | 40% increased Accuracy Rating at Close Range
+cost=3 recipe=[Guilt, Ire, Paranoia] notable=Briny Carapace desc=60% increased Stun Threshold for each time you've been Stunned Recently
+cost=3 recipe=[Guilt, Paranoia, Greed] notable=Defender's Resolve desc=12% increased Block chance | Stagger empties 50% faster while your Shield is lowered
+cost=3 recipe=[Ire, Envy, Envy] notable=Self Mortification desc=Gain 20% of maximum Energy Shield as additional Stun Threshold | 20% increased Stun Threshold while on Full Life
+cost=3 recipe=[Ire, Envy, Guilt] notable=Altered Brain Chemistry desc=25% increased Mana Recovery from Flasks | 10% increased Mana Recovery Rate during Effect of any Mana Flask
+cost=3 recipe=[Ire, Envy, Paranoia] notable=Near Sighted desc=60% increased Accuracy Rating at Close Range
+cost=3 recipe=[Ire, Greed, Envy] notable=Determined Precision desc=30% increased Accuracy Rating at Close Range | +10 to Dexterity
+cost=3 recipe=[Ire, Greed, Greed] notable=Sharpened Claw desc=25% increased Attack Damage
+cost=3 recipe=[Ire, Greed, Guilt] notable=Eagle Eye desc=10% increased Accuracy Rating | +30 to Accuracy Rating
+cost=3 recipe=[Ire, Guilt, Greed] notable=Back in Action desc=80% increased Stun Recovery
+cost=3 recipe=[Ire, Guilt, Guilt] notable=Stance Breaker desc=50% reduced Enemy Chance to Block Sword Attacks
+cost=3 recipe=[Ire, Guilt, Ire] notable=Blinding Flash desc=Blind Enemies when they Stun you | 1% increased Blind Effect
+cost=3 recipe=[Ire, Guilt, Paranoia] notable=Seeing Stars desc=25% increased Daze Buildup | 25% increased Daze Duration
+cost=3 recipe=[Ire, Ire, Envy] notable=Investing Energies desc=40% increased Mana Regeneration Rate while stationary | 20% reduced Mana Regeneration Rate while moving
+cost=3 recipe=[Ire, Ire, Greed] notable=High Alert desc=50% increased Evasion Rating when on Full Life | 25% increased Stun Threshold while on Full Life
+cost=3 recipe=[Ire, Ire, Ire] notable=Insulated Treads desc=Gain Ailment Threshold equal to the lowest of Evasion and Armour on your Boots
+cost=3 recipe=[Ire, Paranoia, Greed] notable=Mass Rejuvenation desc=Regenerate 0.5% of Life per second | Allies in your Presence Regenerate 1.0% of your Maximum Life per second
+cost=3 recipe=[Ire, Paranoia, Ire] notable=Close Confines desc=25% chance for Projectiles to Pierce Enemies within 3m distance of you
+cost=3 recipe=[Ire, Paranoia, Paranoia] notable=Titan's Determination desc=25% increased Stun Threshold | 20% increased Life Regeneration Rate while moving
+cost=3 recipe=[Paranoia, Envy, Greed] notable=Ripping Blade desc=25% increased Damage with Swords
+cost=3 recipe=[Paranoia, Envy, Guilt] notable=Siphon desc=25% increased amount of Mana Leeched | Recover 2% of Mana on Kill
+cost=3 recipe=[Paranoia, Envy, Ire] notable=Break Focus desc=Enemies you Mark have 15% reduced Accuracy Rating
+cost=3 recipe=[Paranoia, Envy, Paranoia] notable=Unbreaking desc=30% increased Stun Threshold | 30% increased Elemental Ailment Threshold
+cost=3 recipe=[Paranoia, Greed, Guilt] notable=Feel no Pain desc=20% increased Armour and Evasion Rating | 20% increased Stun Threshold
+cost=3 recipe=[Paranoia, Greed, Ire] notable=Radial Force desc=10% increased Area of Effect | 10% increased Area Damage
+cost=3 recipe=[Paranoia, Guilt, Guilt] notable=Clear Space desc=20% increased Knockback Distance | 20% chance toKnock Enemies Back with Hits at Close Range
+cost=3 recipe=[Paranoia, Guilt, Ire] notable=Catlike Agility desc=25% increased Evasion Rating | 25% increased Evasion Rating if you've Dodge Rolled Recently
+cost=3 recipe=[Paranoia, Guilt, Paranoia] notable=Pocket Sand desc=50% increased Blind Effect
+cost=3 recipe=[Paranoia, Ire, Guilt] notable=Strong Chin desc=Gain Stun Threshold equal to the lowest of Evasion and Armour on your Helmet
+cost=3 recipe=[Paranoia, Paranoia, Greed] notable=Careful Consideration desc=30% reduced Evasion Rating if you have been Hit Recently | 100% increased Evasion Rating if you haven't been Hit Recently
+cost=3 recipe=[Paranoia, Paranoia, Guilt] notable=Arcane Mixtures desc=25% increased Energy Shield Recharge Rate | Mana Flasks gain 0.1 charges per Second
+cost=3 recipe=[Paranoia, Paranoia, Ire] notable=Impenetrable Shell desc=Defend with 150% of Armour against Attacks from further than 6m
+cost=3 recipe=[Paranoia, Paranoia, Paranoia] notable=Hunter's Talisman desc=+1 Charm Slot
