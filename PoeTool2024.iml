@@ -13,9 +13,11 @@
       <sourceFolder url="file://$MODULE_DIR$/lib" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/binary_wip" />
       <excludeFolder url="file://$MODULE_DIR$/build-web" />
-      <excludeFolder url="file://$MODULE_DIR$/data-extract" />
       <excludeFolder url="file://$MODULE_DIR$/dist" />
       <excludeFolder url="file://$MODULE_DIR$/dist-dev" />
+      <excludeFolder url="file://$MODULE_DIR$/docs" />
+      <excludeFolder url="file://$MODULE_DIR$/docs/data-extract" />
+      <excludeFolder url="file://$MODULE_DIR$/truth_data" />
     </content>
     <orderEntry type="jdk" jdkName="22" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />

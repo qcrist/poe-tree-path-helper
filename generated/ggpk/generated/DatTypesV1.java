@@ -21,6 +21,7 @@ public class DatTypesV1 {
         @Offset(37) public ForeignRow Monster_ShrineBuffsKey; //foreignrow
         @Offset(53) public ForeignRow SummonMonster_MonsterVarietiesKey; //foreignrow
         @Offset(69) public ForeignRow SummonPlayer_MonsterVarietiesKey; //foreignrow
+        @Offset(89) public int Duration; //i32
         @Offset(93) public ForeignRow ShrineSoundsKey; //foreignrow
         @Offset(110) public List<ForeignRow> AchievementItemsKeys; //foreignrow
         @Offset(126) public boolean IsPVPOnly; //bool
@@ -836,8 +837,8 @@ public class DatTypesV1 {
     }
     public static class BlightCraftingResults implements DatType{
         @Offset(0) public String Id; //string
-        @Offset(8) public ForeignRow ModsKey; //foreignrow
-        @Offset(24) public ForeignRow PassiveSkillsKey; //foreignrow
+        @Offset(8) public ForeignRow Mod; //foreignrow
+        @Offset(24) public ForeignRow PassiveSkill; //foreignrow
     }
     public static class BlightCraftingTypes implements DatType{
         @Offset(0) public String Id; //string
@@ -2241,6 +2242,11 @@ public class DatTypesV1 {
         @Offset(60) public String OGGFile; //string
         @Offset(68) public String PassiveTreeImage; //string
         @Offset(84) public String BackgroundImage; //string
+        @Offset(92) public String LeagueName; //string
+        @Offset(100) public String LeagueFlavourText; //string
+        @Offset(108) public String LeagueBackgroundImage; //string
+        @Offset(116) public String LeaguePassiveTreeImage; //string
+        @Offset(132) public String LeagueIcon; //string
     }
     public static class AtlasFog implements DatType{
     }
@@ -2918,6 +2924,7 @@ public class DatTypesV1 {
     public static class GameConstants implements DatType{
         @Offset(0) public String Id; //string
         @Offset(8) public int Value; //i32
+        @Offset(12) public int Divisor; //i32
     }
     public static class GameLogos implements DatType{
         @Offset(0) public String Id; //string
@@ -3679,6 +3686,7 @@ public class DatTypesV1 {
         @Offset(589) public ForeignRow BuffTemplate; //foreignrow
         @Offset(605) public long ArchnemesisMinionMod; //row
         @Offset(613) public int HASH32; //i32
+        @Offset(633) public int GameMode; //i32
     }
     public static class ModSellPriceTypes implements DatType{
         @Offset(0) public String Id; //string
@@ -3705,6 +3713,13 @@ public class DatTypesV1 {
     }
     public static class MonsterConditions implements DatType{
         @Offset(0) public String Id; //string
+        @Offset(8) public ForeignRow Rarity; //foreignrow
+        @Offset(24) public ForeignRow Stat; //foreignrow
+        @Offset(40) public ForeignRow NotRarity; //foreignrow
+        @Offset(56) public List<ForeignRow> NotStat; //foreignrow
+        @Offset(72) public boolean MapBoss; //bool
+        @Offset(73) public boolean NotMapBoss; //bool
+        @Offset(118) public int HASH32; //i32
     }
     public static class MonsterDeathAchievements implements DatType{
         @Offset(0) public String Id; //string
@@ -3734,26 +3749,26 @@ public class DatTypesV1 {
     }
     public static class MonsterMapBossDifficulty implements DatType{
         @Offset(0) public int MapLevel; //i32
-        @Offset(4) public int Stat1Value; //i32
-        @Offset(8) public int Stat2Value; //i32
-        @Offset(12) public ForeignRow StatsKey1; //foreignrow
-        @Offset(28) public ForeignRow StatsKey2; //foreignrow
-        @Offset(44) public ForeignRow StatsKey3; //foreignrow
-        @Offset(60) public int Stat3Value; //i32
-        @Offset(64) public ForeignRow StatsKey4; //foreignrow
-        @Offset(80) public int Stat4Value; //i32
-        @Offset(84) public ForeignRow StatsKey5; //foreignrow
-        @Offset(100) public int Stat5Value; //i32
+        @Offset(4) public int BossLifePercentIncrease; //i32
+        @Offset(8) public int BossDamagePercentIncrease; //i32
+        @Offset(12) public ForeignRow Stat1; //foreignrow
+        @Offset(28) public ForeignRow Stat2; //foreignrow
+        @Offset(44) public ForeignRow Stat3; //foreignrow
+        @Offset(60) public int BossIncItemQuantity; //i32
+        @Offset(64) public ForeignRow Stat4; //foreignrow
+        @Offset(80) public int BossIncItemRarity; //i32
+        @Offset(84) public ForeignRow Stat5; //foreignrow
+        @Offset(100) public int BossAilmentPercentDecrease; //i32
     }
     public static class MonsterMapDifficulty implements DatType{
         @Offset(0) public int MapLevel; //i32
-        @Offset(4) public int Stat1Value; //i32
-        @Offset(8) public int Stat2Value; //i32
-        @Offset(12) public ForeignRow StatsKey1; //foreignrow
-        @Offset(28) public ForeignRow StatsKey2; //foreignrow
-        @Offset(44) public ForeignRow StatsKey3; //foreignrow
+        @Offset(4) public int LifePercentIncrease; //i32
+        @Offset(8) public int DamagePercentIncrease; //i32
+        @Offset(12) public ForeignRow Stat1; //foreignrow
+        @Offset(28) public ForeignRow Stat2; //foreignrow
+        @Offset(44) public ForeignRow Stat3; //foreignrow
         @Offset(60) public int Stat3Value; //i32
-        @Offset(64) public ForeignRow StatsKey4; //foreignrow
+        @Offset(64) public ForeignRow Stat4; //foreignrow
         @Offset(80) public int Stat4Value; //i32
     }
     public static class MonsterMortar implements DatType{
@@ -3764,6 +3779,8 @@ public class DatTypesV1 {
     public static class MonsterPackEntries implements DatType{
         @Offset(0) public String Id; //string
         @Offset(8) public ForeignRow MonsterPacksKey; //foreignrow
+        @Offset(24) public boolean Flag; //bool
+        @Offset(25) public int Weight; //i32
         @Offset(29) public ForeignRow MonsterVarietiesKey; //foreignrow
     }
     public static class MonsterPacks implements DatType{
@@ -3897,6 +3914,7 @@ public class DatTypesV1 {
     public static class MultiPartAchievements implements DatType{
         @Offset(0) public String Id; //string
         @Offset(12) public ForeignRow AchievementItemsKey; //foreignrow
+        @Offset(28) public int Threshold; //i32
     }
     public static class Music implements DatType{
         @Offset(0) public String Id; //string
@@ -4242,6 +4260,8 @@ public class DatTypesV1 {
     public static class QuestItems implements DatType{
         @Offset(0) public ForeignRow Item; //foreignrow
         @Offset(16) public ForeignRow TriggeredQuestFlag; //foreignrow
+        @Offset(70) public ForeignRow HelpText; //foreignrow
+        @Offset(86) public ForeignRow Description; //foreignrow
         @Offset(102) public String Script; //string
     }
     public static class QuestRewardOffers implements DatType{
@@ -4954,6 +4974,8 @@ public class DatTypesV1 {
     }
     public static class MinionType implements DatType{
         @Offset(0) public String Id; //string
+        @Offset(8) public ForeignRow LimitStat; //foreignrow
+        @Offset(24) public ForeignRow ActiveCountStat; //foreignrow
     }
     public static class MonsterStatueOverrides implements DatType{
     }
@@ -5023,6 +5045,16 @@ public class DatTypesV1 {
         @Offset(8) public ForeignRow Tag; //foreignrow
         @Offset(24) public String Name; //string
         @Offset(32) public String Icon; //string
+    }
+    public static class MapRelicInventoryLayout implements DatType{
+        @Offset(0) public int XOffset; //i32
+        @Offset(4) public int YOffset; //i32
+        @Offset(8) public int UnlockQuest; //i32
+        @Offset(12) public String UnlockText; //string
+    }
+    public static class UniqueMapRelicLimits implements DatType{
+        @Offset(0) public ForeignRow Idol; //foreignrow
+        @Offset(16) public int Limit; //i32
     }
     public static final List<Class<? extends DatType>> TYPES = List.of(
         AbyssBossLifeScalingPerLevel.class,
@@ -5485,6 +5517,7 @@ public class DatTypesV1 {
         MapInhabitants.class,
         MapPins.class,
         MapPurchaseCosts.class,
+        MapRelicInventoryLayout.class,
         MapSeries.class,
         MapSeriesTiers.class,
         MapStashSpecialTypeEntries.class,
@@ -5797,6 +5830,7 @@ public class DatTypesV1 {
         UltimatumTrialMasterAudio.class,
         UniqueChests.class,
         UniqueJewelLimits.class,
+        UniqueMapRelicLimits.class,
         UniqueMaps.class,
         UniqueStashLayout.class,
         UniqueStashTypes.class,

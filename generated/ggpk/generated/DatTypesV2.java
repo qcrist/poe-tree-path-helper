@@ -21,6 +21,7 @@ public class DatTypesV2 {
         @Offset(37) public ForeignRow Monster_ShrineBuffsKey; //foreignrow
         @Offset(53) public ForeignRow SummonMonster_MonsterVarietiesKey; //foreignrow
         @Offset(69) public ForeignRow SummonPlayer_MonsterVarietiesKey; //foreignrow
+        @Offset(89) public int Duration; //i32
         @Offset(93) public ForeignRow ShrineSoundsKey; //foreignrow
         @Offset(110) public List<ForeignRow> AchievementItemsKeys; //foreignrow
         @Offset(126) public boolean IsPVPOnly; //bool
@@ -223,9 +224,14 @@ public class DatTypesV2 {
     }
     public static class Essences implements DatType{
         @Offset(0) public ForeignRow BaseItemType; //foreignrow
-        @Offset(16) public int HASH32; //i32
+        @Offset(16) public int HASH32; //u32
         @Offset(48) public ForeignRow MonsterMod; //foreignrow
         @Offset(65) public ForeignRow CraftTag; //foreignrow
+        @Offset(81) public long UpgradeResult; //row
+        @Offset(89) public int Tier; //i32
+        @Offset(93) public ForeignRow Stats; //foreignrow
+        @Offset(109) public ForeignRow CraftedMod; //foreignrow
+        @Offset(125) public List<ForeignRow> ItemClasses; //foreignrow
     }
     public static class EssenceType implements DatType{
         @Offset(0) public String Id; //string
@@ -256,14 +262,14 @@ public class DatTypesV2 {
         @Offset(17) public String CoverImage; //string
         @Offset(25) public String GodName2; //string
         @Offset(33) public String SelectionImage; //string
-        @Offset(41) public List<ForeignRow> Effect1_StatsKeys; //foreignrow
+        @Offset(41) public List<ForeignRow> Effect1_Stats; //foreignrow
         @Offset(57) public List<Integer> Effect1_Values; //i32
-        @Offset(73) public List<ForeignRow> Effect2_StatsKeys; //foreignrow
+        @Offset(73) public List<ForeignRow> Effect2_Stats; //foreignrow
         @Offset(89) public String GodName3; //string
         @Offset(97) public List<Integer> Effect3_Values; //i32
-        @Offset(113) public List<ForeignRow> Effect3_StatsKeys; //foreignrow
+        @Offset(113) public List<ForeignRow> Effect3_Stats; //foreignrow
         @Offset(129) public String GodName4; //string
-        @Offset(137) public List<ForeignRow> Effect4_StatsKeys; //foreignrow
+        @Offset(137) public List<ForeignRow> Effect4_Stats; //foreignrow
         @Offset(153) public List<Integer> Effect4_Values; //i32
         @Offset(169) public String GodName1; //string
         @Offset(177) public List<Integer> Effect2_Values; //i32
@@ -466,23 +472,23 @@ public class DatTypesV2 {
         @Offset(8) public String Description; //string
     }
     public static class DelveCraftingModifiers implements DatType{
-        @Offset(0) public ForeignRow BaseItemTypesKey; //foreignrow
-        @Offset(16) public List<ForeignRow> AddedModsKeys; //foreignrow
-        @Offset(32) public List<ForeignRow> NegativeWeight_TagsKeys; //foreignrow
+        @Offset(0) public ForeignRow BaseItemType; //foreignrow
+        @Offset(16) public List<ForeignRow> AddedMods; //foreignrow
+        @Offset(32) public List<ForeignRow> NegativeWeight_Tags; //foreignrow
         @Offset(48) public List<Integer> NegativeWeight_Values; //i32
-        @Offset(64) public List<ForeignRow> ForcedAddModsKeys; //foreignrow
-        @Offset(80) public List<ForeignRow> ForbiddenDelveCraftingTagsKeys; //foreignrow
-        @Offset(96) public List<ForeignRow> AllowedDelveCraftingTagsKeys; //foreignrow
+        @Offset(64) public List<ForeignRow> ForcedAddMods; //foreignrow
+        @Offset(80) public List<ForeignRow> ForbiddenDelveCraftingTags; //foreignrow
+        @Offset(96) public List<ForeignRow> AllowedDelveCraftingTags; //foreignrow
         @Offset(112) public boolean CanMirrorItem; //bool
         @Offset(113) public int CorruptedEssenceChance; //i32
         @Offset(117) public boolean CanImproveQuality; //bool
         @Offset(118) public boolean HasLuckyRolls; //bool
-        @Offset(120) public List<ForeignRow> SellPrice_ModsKeys; //foreignrow
+        @Offset(120) public List<ForeignRow> SellPrice_Mods; //foreignrow
         @Offset(136) public boolean CanRollWhiteSockets; //bool
-        @Offset(137) public List<ForeignRow> Weight_TagsKeys; //foreignrow
+        @Offset(137) public List<ForeignRow> Weight_Tags; //foreignrow
         @Offset(153) public List<Integer> Weight_Values; //i32
-        @Offset(169) public List<ForeignRow> DelveCraftingModifierDescriptionsKeys; //foreignrow
-        @Offset(185) public List<ForeignRow> BlockedDelveCraftingModifierDescriptionsKeys; //foreignrow
+        @Offset(169) public List<ForeignRow> DelveCraftingModifierDescriptions; //foreignrow
+        @Offset(185) public List<ForeignRow> BlockedDelveCraftingModifierDescriptions; //foreignrow
     }
     public static class DelveCraftingTags implements DatType{
         @Offset(0) public ForeignRow TagsKey; //foreignrow
@@ -772,21 +778,22 @@ public class DatTypesV2 {
         @Offset(0) public ForeignRow ChestsKey; //foreignrow
     }
     public static class BlightCraftingItems implements DatType{
-        @Offset(0) public ForeignRow Oil; //foreignrow
+        @Offset(0) public ForeignRow BaseItemType; //foreignrow
         @Offset(16) public int Tier; //i32
         @Offset(20) public List<ForeignRow> Achievements; //foreignrow
         @Offset(36) public int UseType; //i32
         @Offset(40) public String NameShort; //string
+        @Offset(48) public ForeignRow EnchantedMod; //foreignrow
     }
     public static class BlightCraftingRecipes implements DatType{
         @Offset(0) public String Id; //string
-        @Offset(8) public ForeignRow BlightCraftingResultsKey; //foreignrow
-        @Offset(24) public List<ForeignRow> BlightCraftingItemsKeys; //foreignrow
+        @Offset(8) public ForeignRow BlightCraftingResult; //foreignrow
+        @Offset(24) public List<ForeignRow> BlightCraftingItems; //foreignrow
     }
     public static class BlightCraftingResults implements DatType{
         @Offset(0) public String Id; //string
-        @Offset(8) public ForeignRow ModsKey; //foreignrow
-        @Offset(24) public ForeignRow PassiveSkillsKey; //foreignrow
+        @Offset(8) public ForeignRow Mod; //foreignrow
+        @Offset(24) public ForeignRow PassiveSkill; //foreignrow
     }
     public static class BlightCraftingTypes implements DatType{
         @Offset(0) public String Id; //string
@@ -863,7 +870,7 @@ public class DatTypesV2 {
         @Offset(0) public String Id; //string
         @Offset(8) public String Description; //string
         @Offset(16) public ForeignRow Item; //foreignrow
-        @Offset(48) public short HASH16; //i16
+        @Offset(48) public short HASH16; //u16
     }
     public static class AfflictionBalancePerLevel implements DatType{
     }
@@ -1226,22 +1233,17 @@ public class DatTypesV2 {
         @Offset(8) public List<ForeignRow> Types; //foreignrow
         @Offset(24) public List<ForeignRow> ExtraMods; //foreignrow
         @Offset(40) public List<ForeignRow> TypesFiltered; //foreignrow
-        @Offset(56) public ForeignRow DaemonSpawningData; //foreignrow
-        @Offset(72) public long PreviousTier; //row
-        @Offset(81) public int Radius; //i32
-        @Offset(85) public String Name; //string
-        @Offset(93) public String Icon; //string
-        @Offset(101) public int HASH16; //i32
-        @Offset(105) public List<ForeignRow> TypesExtra; //foreignrow
-        @Offset(121) public int MonsterTypesApplyingRuin; //i32
-        @Offset(125) public ForeignRow MiscAnimated; //foreignrow
-        @Offset(141) public List<ForeignRow> BuffTemplates; //foreignrow
-        @Offset(157) public int Tier; //i32
-        @Offset(165) public String Description; //string
-        @Offset(173) public List<String> MonsterSpawners; //string
-        @Offset(190) public List<ForeignRow> Achievements; //foreignrow
-        @Offset(206) public ForeignRow TextAudio; //foreignrow
-        @Offset(222) public ForeignRow UniqueMapMod; //foreignrow
+        @Offset(56) public List<Long> PreviousTier; //row
+        @Offset(73) public String Name; //string
+        @Offset(81) public String Icon; //string
+        @Offset(89) public short HASH16; //u16
+        @Offset(109) public List<ForeignRow> BuffTemplates; //foreignrow
+        @Offset(125) public int Tier; //i32
+        @Offset(129) public String Description; //string
+        @Offset(153) public ForeignRow TextAudio; //foreignrow
+        @Offset(185) public List<ForeignRow> MapStats; //foreignrow
+        @Offset(201) public List<Integer> MapStatValues; //i32
+        @Offset(217) public List<ForeignRow> MapMods; //foreignrow
     }
     public static class UltimatumModifierTypes implements DatType{
         @Offset(0) public String Id; //string
@@ -2025,20 +2027,29 @@ public class DatTypesV2 {
         @Offset(40) public String Icon_DDSFile; //string
         @Offset(48) public List<Integer> ActiveSkillTargetTypes; //enumrow
         @Offset(64) public List<ForeignRow> ActiveSkillTypes; //foreignrow
-        @Offset(80) public List<ForeignRow> WeaponRestriction_ItemClassesKeys; //foreignrow
-        @Offset(96) public String WebsiteDescription; //string
-        @Offset(104) public String WebsiteImage; //string
-        @Offset(122) public int SkillTotemId; //enumrow
-        @Offset(126) public boolean IsManuallyCasted; //bool
-        @Offset(127) public List<ForeignRow> Input_StatKeys; //foreignrow
-        @Offset(143) public List<ForeignRow> Output_StatKeys; //foreignrow
-        @Offset(159) public List<ForeignRow> MinionActiveSkillTypes; //foreignrow
-        @Offset(197) public ForeignRow AlternateSkillTargetingBehavioursKey; //foreignrow
-        @Offset(214) public String AIFile; //string
-        @Offset(241) public long TransfigureBase; //row
-        @Offset(249) public String VideoClip; //string
-        @Offset(273) public String AiScript; //string
-        @Offset(326) public String StatDescription; //string
+        @Offset(80) public String WebsiteDescription; //string
+        @Offset(88) public String WebsiteImage; //string
+        @Offset(96) public boolean HideOnWebsite; //bool
+        @Offset(97) public String GrantedEffect; //string
+        @Offset(106) public int SkillTotemId; //enumrow
+        @Offset(110) public boolean IsManuallyCasted; //bool
+        @Offset(111) public List<ForeignRow> Input_Stats; //foreignrow
+        @Offset(127) public List<ForeignRow> Output_Stats; //foreignrow
+        @Offset(143) public List<ForeignRow> MinionActiveSkillTypes; //foreignrow
+        @Offset(160) public boolean IsGem; //bool
+        @Offset(161) public List<ForeignRow> SecondarySkillSpecificStats; //foreignrow
+        @Offset(177) public int SkillMine; //i32
+        @Offset(181) public ForeignRow AlternateSkillTargetingBehaviour; //foreignrow
+        @Offset(198) public String AIFile; //string
+        @Offset(206) public List<ForeignRow> StatContextFlags; //foreignrow
+        @Offset(225) public ForeignRow ShapeShiftForm; //foreignrow
+        @Offset(241) public String VideoClip; //string
+        @Offset(249) public ForeignRow CharacterAudioEvent; //foreignrow
+        @Offset(265) public String AiScript; //string
+        @Offset(273) public ForeignRow MinionType; //foreignrow
+        @Offset(314) public int StatDescriptionType; //enumrow
+        @Offset(318) public String StatDescription; //string
+        @Offset(326) public ForeignRow WeaponRequirements; //foreignrow
     }
     public static class ActiveSkillType implements DatType{
         @Offset(0) public String Id; //string
@@ -2089,36 +2100,47 @@ public class DatTypesV2 {
     }
     public static class AlternatePassiveAdditions implements DatType{
         @Offset(0) public String Id; //string
-        @Offset(8) public ForeignRow AlternateTreeVersionsKey; //foreignrow
+        @Offset(8) public ForeignRow AlternateTreeVersion; //foreignrow
         @Offset(24) public int SpawnWeight; //i32
-        @Offset(28) public List<ForeignRow> StatsKeys; //foreignrow
-        @Offset(44) public int Stat1Min; //i32
-        @Offset(48) public int Stat1Max; //i32
-        @Offset(68) public List<Integer> PassiveType; //i32
+        @Offset(28) public List<ForeignRow> Stats; //foreignrow
+        @Offset(44) public int Stat1; //i32
+        @Offset(48) public int Stat2; //i32
+        @Offset(52) public int Stat3; //i32
+        @Offset(56) public List<Integer> PassiveType; //i32
     }
     public static class AlternatePassiveSkills implements DatType{
         @Offset(0) public String Id; //string
-        @Offset(8) public ForeignRow AlternateTreeVersionsKey; //foreignrow
+        @Offset(8) public ForeignRow AlternateTreeVersion; //foreignrow
         @Offset(24) public String Name; //string
         @Offset(32) public List<Integer> PassiveType; //i32
-        @Offset(48) public List<ForeignRow> StatsKeys; //foreignrow
-        @Offset(64) public int Stat1Min; //i32
-        @Offset(68) public int Stat1Max; //i32
-        @Offset(72) public int Stat2Min; //i32
-        @Offset(76) public int Stat2Max; //i32
-        @Offset(112) public int SpawnWeight; //i32
-        @Offset(120) public int RandomMin; //i32
-        @Offset(124) public int RandomMax; //i32
-        @Offset(128) public String FlavourText; //string
-        @Offset(136) public String DDSIcon; //string
-        @Offset(144) public List<ForeignRow> AchievementItemsKeys; //foreignrow
+        @Offset(48) public List<ForeignRow> Stats; //foreignrow
+        @Offset(64) public int Stat1; //i32
+        @Offset(68) public int Stat2; //i32
+        @Offset(72) public int Stat3; //i32
+        @Offset(76) public int Stat4; //i32
+        @Offset(80) public int Stat5; //i32
+        @Offset(84) public int Stat6; //i32
+        @Offset(88) public int SpawnWeight; //i32
+        @Offset(92) public int ConquerorIndex; //i32
+        @Offset(96) public int Random; //i32
+        @Offset(100) public String FlavourText; //string
+        @Offset(108) public String DDSIcon; //string
+        @Offset(116) public List<ForeignRow> AchievementItems; //foreignrow
+        @Offset(132) public int ConquerorVersion; //i32
+        @Offset(136) public int ConquerorSpawnWeight; //i32
     }
     public static class AlternateSkillTargetingBehaviours implements DatType{
         @Offset(0) public String Id; //string
         @Offset(12) public ForeignRow ClientStrings; //foreignrow
     }
     public static class AlternateTreeVersions implements DatType{
-        @Offset(0) public String Id; //string
+        @Offset(0) public String ConquerorType; //string
+        @Offset(8) public boolean SmallAttributeReplaced; //bool
+        @Offset(9) public boolean SmallNormalPassiveReplaced; //bool
+        @Offset(10) public int SmallAttributePassiveSkillAdditions; //i32
+        @Offset(14) public int NotableAdditions; //i32
+        @Offset(18) public int SmallNormalPassiveSkillAdditions; //i32
+        @Offset(22) public int NotableReplacementSpawnWeight; //i32
     }
     public static class AnimatedObjectFlags implements DatType{
         @Offset(0) public String AOFile; //string
@@ -2164,7 +2186,7 @@ public class DatTypesV2 {
     public static class AreaTransitionInfo implements DatType{
     }
     public static class ArmourTypes implements DatType{
-        @Offset(0) public ForeignRow BaseItemTypesKey; //foreignrow
+        @Offset(0) public ForeignRow BaseItemType; //foreignrow
         @Offset(16) public int Armour; //i32
         @Offset(20) public int Evasion; //i32
         @Offset(24) public int EnergyShield; //i32
@@ -2181,6 +2203,9 @@ public class DatTypesV2 {
         @Offset(52) public String FlavourText; //string
         @Offset(60) public String OGGFile; //string
         @Offset(68) public String PassiveTreeImage; //string
+        @Offset(76) public int TreeRegionVector; //i32
+        @Offset(80) public int TreeRegionAngle; //i32
+        @Offset(84) public int BackgroundImage; //i32
         @Offset(92) public boolean Disabled; //bool
     }
     public static class AtlasFog implements DatType{
@@ -2241,31 +2266,33 @@ public class DatTypesV2 {
     }
     public static class BaseItemTypes implements DatType{
         @Offset(0) public String Id; //string
-        @Offset(8) public ForeignRow ItemClassesKey; //foreignrow
+        @Offset(8) public ForeignRow ItemClass; //foreignrow
         @Offset(24) public int Width; //i32
         @Offset(28) public int Height; //i32
         @Offset(32) public String Name; //string
         @Offset(40) public String InheritsFrom; //string
         @Offset(48) public int DropLevel; //i32
-        @Offset(52) public ForeignRow FlavourTextKey; //foreignrow
-        @Offset(68) public List<ForeignRow> Implicit_ModsKeys; //foreignrow
+        @Offset(52) public ForeignRow FlavourText; //foreignrow
+        @Offset(68) public List<ForeignRow> Implicit_Mods; //foreignrow
         @Offset(84) public int SizeOnGround; //i32
         @Offset(88) public ForeignRow SoundEffect; //foreignrow
-        @Offset(104) public List<ForeignRow> TagsKeys; //foreignrow
+        @Offset(104) public List<ForeignRow> Tags; //foreignrow
         @Offset(120) public int ModDomain; //enumrow
         @Offset(124) public int SiteVisibility; //i32
         @Offset(128) public ForeignRow ItemVisualIdentity; //foreignrow
-        @Offset(144) public int HASH32; //i32
+        @Offset(144) public int HASH32; //u32
         @Offset(148) public List<ForeignRow> VendorRecipe_AchievementItems; //foreignrow
         @Offset(164) public String Inflection; //string
-        @Offset(172) public ForeignRow Equip_AchievementItemsKey; //foreignrow
+        @Offset(172) public ForeignRow Equip_AchievementItem; //foreignrow
         @Offset(188) public boolean IsCorrupted; //bool
         @Offset(189) public List<ForeignRow> Identify_AchievementItems; //foreignrow
         @Offset(205) public List<ForeignRow> IdentifyMagic_AchievementItems; //foreignrow
-        @Offset(221) public long FragmentBaseItemTypesKey; //row
+        @Offset(221) public long FragmentBaseItemType; //row
+        @Offset(230) public ForeignRow UncutGemSoundEffect; //foreignrow
         @Offset(263) public ForeignRow TradeMarketCategory; //foreignrow
         @Offset(279) public boolean Unmodifiable; //bool
         @Offset(280) public List<ForeignRow> Achievement; //foreignrow
+        @Offset(296) public ForeignRow ShopTag; //foreignrow
     }
     public static class BindableVirtualKeys implements DatType{
         @Offset(0) public int KeyCode; //i32
@@ -2291,23 +2318,32 @@ public class DatTypesV2 {
         @Offset(16) public boolean Invisible; //bool
         @Offset(17) public boolean Removable; //bool
         @Offset(18) public String Name; //string
-        @Offset(26) public List<ForeignRow> StatsKeys; //foreignrow
-        @Offset(48) public ForeignRow Maximum_StatsKey; //foreignrow
-        @Offset(64) public ForeignRow Current_StatsKey; //foreignrow
-        @Offset(85) public ForeignRow BuffVisualsKey; //foreignrow
+        @Offset(26) public List<ForeignRow> Stats; //foreignrow
+        @Offset(42) public boolean CancelOnDeath; //bool
+        @Offset(43) public int MergeMode; //enumrow
+        @Offset(47) public boolean ShowCount; //bool
+        @Offset(48) public ForeignRow Maximum_Stat; //foreignrow
+        @Offset(64) public ForeignRow Current_Stat; //foreignrow
+        @Offset(85) public ForeignRow BuffVisual; //foreignrow
         @Offset(103) public int BuffCategory; //i32
         @Offset(111) public int BuffLimit; //i32
-        @Offset(116) public String Id2; //string
+        @Offset(116) public String Implementation; //string
         @Offset(124) public boolean IsRecovery; //bool
-        @Offset(204) public List<ForeignRow> BinaryStats; //foreignrow
+        @Offset(126) public ForeignRow MinStat; //foreignrow
+        @Offset(143) public int UIStackMode; //i32
+        @Offset(148) public boolean IsSkillBuff; //bool
+        @Offset(188) public List<ForeignRow> Stats2; //foreignrow
+        @Offset(204) public List<ForeignRow> GrantedFlags; //foreignrow
+        @Offset(220) public List<ForeignRow> GrantedStats; //foreignrow
+        @Offset(236) public List<ForeignRow> ConditionStats; //foreignrow
     }
     public static class BuffTemplates implements DatType{
         @Offset(0) public String Id; //string
-        @Offset(8) public ForeignRow BuffDefinitionsKey; //foreignrow
+        @Offset(8) public ForeignRow BuffDefinition; //foreignrow
         @Offset(24) public List<Integer> Buff_StatValues; //i32
         @Offset(40) public int AuraRadius; //i32
-        @Offset(76) public ForeignRow BuffVisualsKey; //foreignrow
-        @Offset(97) public List<ForeignRow> StatsKey; //foreignrow
+        @Offset(76) public ForeignRow BuffVisual; //foreignrow
+        @Offset(97) public List<ForeignRow> Stats; //foreignrow
     }
     public static class BuffVisualOrbArt implements DatType{
         @Offset(0) public String Id; //string
@@ -2322,6 +2358,8 @@ public class DatTypesV2 {
     }
     public static class BuffVisualOrbTypes implements DatType{
         @Offset(0) public String Id; //string
+        @Offset(29) public ForeignRow RadiusStat; //foreignrow
+        @Offset(45) public ForeignRow HeightStat; //foreignrow
     }
     public static class BuffVisuals implements DatType{
         @Offset(0) public String Id; //string
@@ -2342,6 +2380,7 @@ public class DatTypesV2 {
     }
     public static class BuffVisualsArtVariations implements DatType{
         @Offset(0) public String Buff; //string
+        @Offset(8) public List<ForeignRow> Visuals; //foreignrow
     }
     public static class BuffVisualSetEntries implements DatType{
         @Offset(0) public String Id; //string
@@ -2417,7 +2456,8 @@ public class DatTypesV2 {
         @Offset(500) public String Attr; //string
         @Offset(508) public String AttrLowercase; //string
         @Offset(516) public String Script; //string
-        @Offset(604) public String GemCuttingIcon; //string
+        @Offset(556) public String BaseClass; //string
+        @Offset(616) public String GemCuttingIcon; //string
     }
     public static class CharacterStartQuestState implements DatType{
         @Offset(0) public String Id; //string
@@ -2471,25 +2511,13 @@ public class DatTypesV2 {
         @Offset(0) public String Id; //string
         @Offset(13) public String Name; //string
         @Offset(21) public List<String> AOFiles; //string
-        @Offset(65) public ForeignRow BaseItemTypesKey; //foreignrow
-        @Offset(82) public List<ForeignRow> ModsKeys; //foreignrow
-        @Offset(98) public List<ForeignRow> TagsKeys; //foreignrow
-        @Offset(114) public ForeignRow ChestEffectsKey; //foreignrow
-        @Offset(130) public int MinLevel; //i32
-        @Offset(142) public int MaxLevel; //i32
-        @Offset(146) public ForeignRow Corrupt_AchievementItemsKey; //foreignrow
-        @Offset(162) public ForeignRow CurrencyUse_AchievementItemsKey; //foreignrow
-        @Offset(178) public List<ForeignRow> Encounter_AchievementItemsKeys; //foreignrow
-        @Offset(210) public String InheritsFrom; //string
-        @Offset(318) public boolean IsHardmode; //bool
-        @Offset(319) public List<ForeignRow> StatsHardmode; //foreignrow
     }
     public static class ClientStrings implements DatType{
         @Offset(0) public String Id; //string
         @Offset(8) public String Text; //string
         @Offset(16) public String XBoxText; //string
         @Offset(24) public String XBoxText2; //string
-        @Offset(32) public int HASH32; //i32
+        @Offset(32) public int HASH32; //u32
         @Offset(36) public String PlaystationText; //string
     }
     public static class ClientLeagueAction implements DatType{
@@ -2534,10 +2562,13 @@ public class DatTypesV2 {
     }
     public static class CostTypes implements DatType{
         @Offset(0) public String Id; //string
-        @Offset(8) public ForeignRow StatsKey; //foreignrow
+        @Offset(8) public ForeignRow Stat; //foreignrow
         @Offset(24) public String FormatText; //string
+        @Offset(32) public int Divisor; //i32
+        @Offset(36) public boolean PerMinute; //bool
     }
     public static class CraftingBenchOptions implements DatType{
+        @Offset(0) public ForeignRow HideoutNPC; //foreignrow
         @Offset(16) public int Order; //i32
         @Offset(20) public ForeignRow AddMod; //foreignrow
         @Offset(36) public List<ForeignRow> Cost_BaseItemTypes; //foreignrow
@@ -2559,8 +2590,14 @@ public class DatTypesV2 {
         @Offset(186) public ForeignRow UnlockCategory; //foreignrow
         @Offset(202) public int UnveilsRequired; //i32
         @Offset(206) public int UnveilsRequired2; //i32
+        @Offset(226) public List<ForeignRow> KalandraAchievement; //foreignrow
+        @Offset(250) public ForeignRow VeiledMod; //foreignrow
         @Offset(266) public ForeignRow AddEnchantment; //foreignrow
         @Offset(282) public ForeignRow SortCategory; //foreignrow
+        @Offset(298) public ForeignRow ModType; //foreignrow
+        @Offset(319) public ForeignRow Stat1; //foreignrow
+        @Offset(335) public ForeignRow Stat2; //foreignrow
+        @Offset(351) public ForeignRow Stat3; //foreignrow
     }
     public static class CraftingBenchSortCategories implements DatType{
         @Offset(0) public String Id; //string
@@ -2583,16 +2620,16 @@ public class DatTypesV2 {
         @Offset(32) public String Text; //string
     }
     public static class CurrencyItems implements DatType{
-        @Offset(0) public ForeignRow BaseItemTypesKey; //foreignrow
+        @Offset(0) public ForeignRow BaseItemType; //foreignrow
         @Offset(16) public int StackSize; //i32
         @Offset(20) public int CurrencyUseType; //i32
         @Offset(24) public String Action; //string
         @Offset(32) public String Directions; //string
-        @Offset(40) public ForeignRow FullStack_BaseItemTypesKey; //foreignrow
+        @Offset(40) public ForeignRow FullStack_BaseItemType; //foreignrow
         @Offset(56) public String Description; //string
-        @Offset(64) public List<ForeignRow> Usage_AchievementItemsKeys; //foreignrow
+        @Offset(64) public List<ForeignRow> Usage_AchievementItems; //foreignrow
         @Offset(80) public boolean Scroll; //bool
-        @Offset(81) public ForeignRow Possession_AchievementItemsKey; //foreignrow
+        @Offset(81) public ForeignRow Possession_AchievementItem; //foreignrow
         @Offset(129) public int CurrencyTab_StackSize; //i32
         @Offset(133) public String XBoxDirections; //string
         @Offset(145) public List<ForeignRow> ModifyMapsAchievements; //foreignrow
@@ -2643,9 +2680,16 @@ public class DatTypesV2 {
         @Offset(20) public int Life; //i32
         @Offset(24) public int Experience; //i32
         @Offset(28) public int AllyLife; //i32
+        @Offset(32) public int Armour; //i32
         @Offset(36) public int Difficulty; //i32
-        @Offset(40) public float Damage2; //f32
-        @Offset(64) public int Armour; //i32
+        @Offset(40) public float MinionDamage; //f32
+        @Offset(44) public int AltLife1; //i32
+        @Offset(48) public float AltDamage1; //f32
+        @Offset(52) public float AltDamage2; //f32
+        @Offset(56) public int AltLife2; //i32
+        @Offset(60) public int EvasiveEvasion; //i32
+        @Offset(64) public int AilmentThreshold; //i32
+        @Offset(68) public int StunThreshold; //i32
     }
     public static class DeliriumStashTabLayout implements DatType{
         @Offset(0) public String Id; //string
@@ -2815,19 +2859,19 @@ public class DatTypesV2 {
     public static class FixedMissions implements DatType{
     }
     public static class Flasks implements DatType{
-        @Offset(0) public ForeignRow BaseItemTypesKey; //foreignrow
+        @Offset(0) public ForeignRow BaseItemType; //foreignrow
         @Offset(16) public String Name; //string
         @Offset(24) public int Type; //enumrow
         @Offset(28) public int LifePerUse; //i32
         @Offset(32) public int ManaPerUse; //i32
         @Offset(36) public int RecoveryTime; //i32
         @Offset(40) public int RecoveryTime2; //i32
-        @Offset(44) public ForeignRow BuffDefinitionsKey; //foreignrow
+        @Offset(44) public ForeignRow BuffDefinition; //foreignrow
         @Offset(64) public List<ForeignRow> UtilityBuff; //foreignrow
     }
     public static class FlavourText implements DatType{
         @Offset(0) public String Id; //string
-        @Offset(8) public short HASH16; //i16
+        @Offset(8) public short HASH16; //u16
         @Offset(10) public String Text; //string
     }
     public static class Footprints implements DatType{
@@ -2855,6 +2899,7 @@ public class DatTypesV2 {
     public static class GameConstants implements DatType{
         @Offset(0) public String Id; //string
         @Offset(8) public int Value; //i32
+        @Offset(12) public int Divisor; //i32
     }
     public static class GameLogos implements DatType{
         @Offset(0) public String Id; //string
@@ -2878,10 +2923,10 @@ public class DatTypesV2 {
     }
     public static class GemTags implements DatType{
         @Offset(0) public String Id; //string
-        @Offset(8) public String Tag; //string
-        @Offset(16) public ForeignRow Stat1; //foreignrow
-        @Offset(32) public ForeignRow Stat2; //foreignrow
-        @Offset(48) public ForeignRow Stat3; //foreignrow
+        @Offset(8) public String Name; //string
+        @Offset(16) public ForeignRow LocalLevelStat; //foreignrow
+        @Offset(32) public ForeignRow LocalQualityStat; //foreignrow
+        @Offset(48) public ForeignRow GlobalSpellLevelStat; //foreignrow
     }
     public static class GenericBuffAuras implements DatType{
         @Offset(0) public String Id; //string
@@ -2923,9 +2968,11 @@ public class DatTypesV2 {
         @Offset(40) public int CharacterLevel; //i32
     }
     public static class GrantedEffectQualityStats implements DatType{
-        @Offset(0) public ForeignRow GrantedEffectsKey; //foreignrow
-        @Offset(16) public List<ForeignRow> StatsKeys; //foreignrow
+        @Offset(0) public ForeignRow GrantedEffect; //foreignrow
+        @Offset(16) public List<ForeignRow> Stats; //foreignrow
         @Offset(32) public List<Integer> StatsValuesPermille; //i32
+        @Offset(48) public List<ForeignRow> AddTypes; //foreignrow
+        @Offset(64) public List<ForeignRow> AddMinionTypes; //foreignrow
     }
     public static class GrantedEffects implements DatType{
         @Offset(0) public String Id; //string
@@ -2935,19 +2982,22 @@ public class DatTypesV2 {
         @Offset(33) public List<ForeignRow> AddedActiveSkillTypes; //foreignrow
         @Offset(49) public List<ForeignRow> ExcludedActiveSkillTypes; //foreignrow
         @Offset(65) public boolean SupportsGemsOnly; //bool
-        @Offset(66) public int HASH32; //i32
+        @Offset(66) public int HASH32; //u32
         @Offset(70) public boolean CannotBeSupported; //bool
+        @Offset(71) public int LifeLeech; //i32
         @Offset(75) public int CastTime; //i32
         @Offset(79) public ForeignRow ActiveSkill; //foreignrow
         @Offset(95) public boolean IgnoreMinionTypes; //bool
+        @Offset(96) public boolean CooldownNotRecoverDuringActive; //bool
         @Offset(97) public List<ForeignRow> AddedMinionActiveSkillTypes; //foreignrow
         @Offset(113) public ForeignRow Animation; //foreignrow
         @Offset(129) public ForeignRow MultiPartAchievement; //foreignrow
-        @Offset(146) public List<ForeignRow> SupportWeaponRestrictions; //foreignrow
-        @Offset(162) public long RegularVariant; //row
-        @Offset(184) public ForeignRow StatSet; //foreignrow
-        @Offset(200) public List<ForeignRow> AdditionalStatSets; //foreignrow
-        @Offset(224) public List<ForeignRow> CostTypes; //foreignrow
+        @Offset(146) public long RegularVariant; //row
+        @Offset(168) public ForeignRow StatSet; //foreignrow
+        @Offset(184) public List<ForeignRow> AdditionalStatSets; //foreignrow
+        @Offset(200) public String Audio; //string
+        @Offset(208) public List<ForeignRow> CostTypes; //foreignrow
+        @Offset(245) public List<ForeignRow> SupportWeaponRestrictions; //foreignrow
     }
     public static class GrantedEffectsPerLevel implements DatType{
         @Offset(0) public ForeignRow GrantedEffect; //foreignrow
@@ -2959,10 +3009,14 @@ public class DatTypesV2 {
         @Offset(36) public int VaalSouls; //i32
         @Offset(40) public int VaalStoredUses; //i32
         @Offset(44) public int CooldownGroup; //i32
+        @Offset(48) public int PvPDamageMultiplier; //i32
         @Offset(52) public int SoulGainPreventionDuration; //i32
         @Offset(56) public int AttackSpeedMultiplier; //i32
+        @Offset(80) public int AttackTime; //i32
         @Offset(84) public int Reservation; //i32
         @Offset(92) public List<Integer> CostAmounts; //i32
+        @Offset(108) public float ActorLevel; //f32
+        @Offset(112) public int EffectOnPlayer; //i32
     }
     public static class GrantedEffectStatSets implements DatType{
         @Offset(0) public String Id; //string
@@ -2972,6 +3026,8 @@ public class DatTypesV2 {
         @Offset(56) public List<Integer> ConstantStatsValues; //i32
         @Offset(72) public float BaseEffectiveness; //f32
         @Offset(76) public float IncrementalEffectiveness; //f32
+        @Offset(80) public float DamageIncrementalEffectiveness; //f32
+        @Offset(84) public List<ForeignRow> IgnoredStats; //foreignrow
     }
     public static class GrantedEffectStatSetsPerLevel implements DatType{
         @Offset(0) public ForeignRow StatSet; //foreignrow
@@ -2987,6 +3043,7 @@ public class DatTypesV2 {
         @Offset(129) public List<ForeignRow> AdditionalStats; //foreignrow
         @Offset(145) public List<Integer> StatInterpolations; //enumrow
         @Offset(161) public List<Float> FloatStatsValues; //f32
+        @Offset(177) public float ActorLevel; //f32
         @Offset(181) public int BaseMultiplier; //i32
     }
     public static class GroundEffects implements DatType{
@@ -3025,10 +3082,10 @@ public class DatTypesV2 {
         @Offset(40) public String Name; //string
     }
     public static class HideoutNPCs implements DatType{
-        @Offset(0) public ForeignRow Hideout_NPCsKey; //foreignrow
-        @Offset(16) public List<ForeignRow> Regular_NPCsKeys; //foreignrow
-        @Offset(32) public ForeignRow HideoutDoodadsKey; //foreignrow
-        @Offset(48) public int NPCMasterKey; //i32
+        @Offset(0) public ForeignRow Hideout_NPC; //foreignrow
+        @Offset(16) public List<ForeignRow> Regular_NPCs; //foreignrow
+        @Offset(32) public ForeignRow HideoutDoodad; //foreignrow
+        @Offset(48) public int NPCMaster; //i32
     }
     public static class HideoutRarity implements DatType{
         @Offset(0) public String Id; //string
@@ -3107,6 +3164,7 @@ public class DatTypesV2 {
         @Offset(146) public List<Integer> ItemClassFlags; //i32
         @Offset(162) public boolean Unmodfiable; //bool
         @Offset(163) public boolean CanBeFractured; //bool
+        @Offset(164) public ForeignRow EquipAchievement; //foreignrow
         @Offset(180) public boolean UsableInMapDevice; //bool
     }
     public static class ItemCostPerLevel implements DatType{
@@ -3174,12 +3232,13 @@ public class DatTypesV2 {
         @Offset(48) public String TwoHandedSwordEPKFile; //string
         @Offset(56) public String TwoHandedStaffEPKFile; //string
         @Offset(64) public short HASH16; //i16
-        @Offset(66) public String TwoHandedMaceEPKFile; //string
-        @Offset(74) public String OneHandedAxeEPKFile; //string
-        @Offset(82) public String TwoHandedAxeEPKFile; //string
-        @Offset(90) public String ClawEPKFile; //string
-        @Offset(98) public String PETFile; //string
-        @Offset(106) public List<String> Shield; //string
+        @Offset(68) public String TwoHandedMaceEPKFile; //string
+        @Offset(76) public String OneHandedAxeEPKFile; //string
+        @Offset(84) public String TwoHandedAxeEPKFile; //string
+        @Offset(92) public String ClawEPKFile; //string
+        @Offset(100) public String PETFile; //string
+        @Offset(108) public String Shield; //string
+        @Offset(116) public String OnHitEffect; //string
     }
     public static class ItemVisualHeldBodyModel implements DatType{
         @Offset(0) public ForeignRow ItemVisualIdentity; //foreignrow
@@ -3203,7 +3262,7 @@ public class DatTypesV2 {
         @Offset(8) public String DDSFile; //string
         @Offset(16) public String AOFile; //string
         @Offset(24) public ForeignRow InventorySoundEffect; //foreignrow
-        @Offset(40) public short HASH16; //i16
+        @Offset(40) public short HASH16; //u16
         @Offset(42) public String AOFile2; //string
         @Offset(50) public List<String> MarauderSMFiles; //string
         @Offset(66) public List<String> RangerSMFiles; //string
@@ -3219,13 +3278,13 @@ public class DatTypesV2 {
         @Offset(194) public String TemplarShape; //string
         @Offset(202) public String ShadowShape; //string
         @Offset(210) public String ScionShape; //string
-        @Offset(238) public List<ForeignRow> Pickup_AchievementItemsKeys; //foreignrow
+        @Offset(238) public List<ForeignRow> Pickup_AchievementItems; //foreignrow
         @Offset(254) public List<String> SMFiles; //string
-        @Offset(270) public List<ForeignRow> Identify_AchievementItemsKeys; //foreignrow
+        @Offset(270) public List<ForeignRow> Identify_AchievementItems; //foreignrow
         @Offset(286) public String EPKFile; //string
-        @Offset(294) public List<ForeignRow> Corrupt_AchievementItemsKeys; //foreignrow
+        @Offset(294) public List<ForeignRow> Corrupt_AchievementItems; //foreignrow
         @Offset(310) public boolean IsAlternateArt; //bool
-        @Offset(312) public ForeignRow CreateCorruptedJewelAchievementItemsKey; //foreignrow
+        @Offset(312) public ForeignRow CreateCorruptedJewelAchievementItem; //foreignrow
         @Offset(328) public String AnimationLocation; //string
         @Offset(432) public boolean IsAtlasOfWorldsMapIcon; //bool
         @Offset(433) public boolean IsTier16Icon; //bool
@@ -3334,12 +3393,12 @@ public class DatTypesV2 {
         @Offset(4) public ForeignRow Cost; //foreignrow
     }
     public static class Maps implements DatType{
-        @Offset(0) public ForeignRow BaseItemTypesKey; //foreignrow
-        @Offset(16) public ForeignRow Regular_WorldAreasKey; //foreignrow
-        @Offset(32) public List<ForeignRow> MonsterPacksKeys; //foreignrow
+        @Offset(0) public ForeignRow BaseItemType; //foreignrow
+        @Offset(16) public ForeignRow Regular_WorldArea; //foreignrow
+        @Offset(32) public List<ForeignRow> MonsterPacks; //foreignrow
         @Offset(48) public ForeignRow AchievementItem; //foreignrow
         @Offset(72) public int Tier; //i32
-        @Offset(76) public int MapSeriesKey; //i32
+        @Offset(76) public int MapSeries; //i32
     }
     public static class MapSeries implements DatType{
         @Offset(0) public String Id; //string
@@ -3549,58 +3608,54 @@ public class DatTypesV2 {
     public static class Mods implements DatType{
         @Offset(0) public String Id; //string
         @Offset(8) public short HASH16; //u16
-        @Offset(10) public ForeignRow ModTypeKey; //foreignrow
+        @Offset(10) public ForeignRow ModType; //foreignrow
         @Offset(26) public int Level; //i32
-        @Offset(30) public ForeignRow StatsKey1; //foreignrow
-        @Offset(46) public ForeignRow StatsKey2; //foreignrow
-        @Offset(62) public ForeignRow StatsKey3; //foreignrow
-        @Offset(78) public ForeignRow StatsKey4; //foreignrow
+        @Offset(30) public ForeignRow Stat1; //foreignrow
+        @Offset(46) public ForeignRow Stat2; //foreignrow
+        @Offset(62) public ForeignRow Stat3; //foreignrow
+        @Offset(78) public ForeignRow Stat4; //foreignrow
         @Offset(94) public int Domain; //enumrow
         @Offset(98) public String Name; //string
         @Offset(106) public int GenerationType; //enumrow
         @Offset(110) public List<ForeignRow> Families; //foreignrow
-        @Offset(126) public int Stat1Min; //i32
-        @Offset(130) public int Stat1Max; //i32
-        @Offset(134) public int Stat2Min; //i32
-        @Offset(138) public int Stat2Max; //i32
-        @Offset(142) public int Stat3Min; //i32
-        @Offset(146) public int Stat3Max; //i32
-        @Offset(150) public int Stat4Min; //i32
-        @Offset(154) public int Stat4Max; //i32
-        @Offset(158) public List<ForeignRow> SpawnWeight_TagsKeys; //foreignrow
-        @Offset(174) public List<Integer> SpawnWeight_Values; //i32
-        @Offset(190) public List<ForeignRow> TagsKeys; //foreignrow
-        @Offset(206) public List<ForeignRow> GrantedEffectsPerLevelKeys; //foreignrow
-        @Offset(238) public String MonsterMetadata; //string
-        @Offset(246) public List<ForeignRow> MonsterKillAchievements; //foreignrow
-        @Offset(262) public List<ForeignRow> ChestModType; //foreignrow
-        @Offset(278) public int Stat5Min; //i32
-        @Offset(282) public int Stat5Max; //i32
-        @Offset(286) public ForeignRow StatsKey5; //foreignrow
-        @Offset(302) public List<ForeignRow> FullAreaClear_AchievementItemsKey; //foreignrow
-        @Offset(318) public List<ForeignRow> AchievementItemsKey; //foreignrow
-        @Offset(334) public List<ForeignRow> GenerationWeight_TagsKeys; //foreignrow
-        @Offset(350) public List<Integer> GenerationWeight_Values; //i32
-        @Offset(366) public List<ForeignRow> ModifyMapsAchievements; //foreignrow
-        @Offset(382) public boolean IsEssenceOnlyModifier; //bool
-        @Offset(383) public int Stat6Min; //i32
-        @Offset(387) public int Stat6Max; //i32
-        @Offset(391) public ForeignRow StatsKey6; //foreignrow
-        @Offset(407) public int MaxLevel; //i32
-        @Offset(412) public List<ForeignRow> CraftingItemClassRestrictions; //foreignrow
-        @Offset(428) public String MonsterOnDeath; //string
-        @Offset(456) public int Heist_SubStatValue1; //i32
-        @Offset(460) public int Heist_SubStatValue2; //i32
-        @Offset(464) public ForeignRow Heist_StatsKey0; //foreignrow
-        @Offset(480) public ForeignRow Heist_StatsKey1; //foreignrow
-        @Offset(496) public int Heist_AddStatValue1; //i32
-        @Offset(500) public int Heist_AddStatValue2; //i32
-        @Offset(504) public int InfluenceTypes; //enumrow
-        @Offset(508) public List<ForeignRow> ImplicitTagsKeys; //foreignrow
-        @Offset(589) public ForeignRow BuffTemplate; //foreignrow
-        @Offset(605) public long ArchnemesisMinionMod; //row
-        @Offset(613) public int HASH32; //i32
-        @Offset(653) public int RadiusJewelType; //i32
+        @Offset(126) public int Stat1Value; //i32
+        @Offset(130) public int Stat2Value; //i32
+        @Offset(134) public int Stat3Value; //i32
+        @Offset(138) public int Stat4Value; //i32
+        @Offset(142) public List<ForeignRow> SpawnWeight_Tags; //foreignrow
+        @Offset(158) public List<Integer> SpawnWeight_Values; //i32
+        @Offset(174) public List<ForeignRow> Tags; //foreignrow
+        @Offset(190) public List<ForeignRow> GrantedEffectsPerLevel; //foreignrow
+        @Offset(206) public List<Integer> AuraFlags; //enumrow
+        @Offset(222) public String MonsterMetadata; //string
+        @Offset(230) public List<ForeignRow> MonsterKillAchievements; //foreignrow
+        @Offset(246) public List<ForeignRow> ChestModType; //foreignrow
+        @Offset(262) public int Stat5Value; //i32
+        @Offset(266) public ForeignRow Stat5; //foreignrow
+        @Offset(282) public List<ForeignRow> FullAreaClear_AchievementItems; //foreignrow
+        @Offset(298) public List<ForeignRow> AchievementItems; //foreignrow
+        @Offset(314) public List<ForeignRow> GenerationWeight_Tags; //foreignrow
+        @Offset(330) public List<Integer> GenerationWeight_Values; //i32
+        @Offset(346) public List<ForeignRow> ModifyMapsAchievements; //foreignrow
+        @Offset(362) public int Stat6Value; //i32
+        @Offset(366) public ForeignRow Stat6; //foreignrow
+        @Offset(382) public int MaxLevel; //i32
+        @Offset(387) public List<ForeignRow> CraftingItemClassRestrictions; //foreignrow
+        @Offset(403) public String MonsterOnDeath; //string
+        @Offset(415) public List<ForeignRow> HeistAchievements; //foreignrow
+        @Offset(431) public int Heist_SubStatValue1; //i32
+        @Offset(435) public int Heist_SubStatValue2; //i32
+        @Offset(439) public ForeignRow Heist_Stat0; //foreignrow
+        @Offset(455) public ForeignRow Heist_Stat1; //foreignrow
+        @Offset(471) public int Heist_AddStatValue1; //i32
+        @Offset(475) public int Heist_AddStatValue2; //i32
+        @Offset(479) public int InfluenceType; //enumrow
+        @Offset(483) public List<ForeignRow> ImplicitTags; //foreignrow
+        @Offset(564) public ForeignRow BuffTemplate; //foreignrow
+        @Offset(580) public long ArchnemesisMinionMod; //row
+        @Offset(588) public int HASH32; //u32
+        @Offset(628) public int RadiusJewelType; //i32
+        @Offset(632) public boolean IsEssenceOnlyModifier; //bool
     }
     public static class ModSellPriceTypes implements DatType{
         @Offset(0) public String Id; //string
@@ -3627,6 +3682,13 @@ public class DatTypesV2 {
     }
     public static class MonsterConditions implements DatType{
         @Offset(0) public String Id; //string
+        @Offset(8) public ForeignRow Rarity; //foreignrow
+        @Offset(24) public ForeignRow Stat; //foreignrow
+        @Offset(40) public ForeignRow NotRarity; //foreignrow
+        @Offset(56) public List<ForeignRow> NotStat; //foreignrow
+        @Offset(72) public boolean MapBoss; //bool
+        @Offset(73) public boolean NotMapBoss; //bool
+        @Offset(118) public int HASH32; //i32
     }
     public static class MonsterDeathAchievements implements DatType{
         @Offset(0) public String Id; //string
@@ -3656,26 +3718,26 @@ public class DatTypesV2 {
     }
     public static class MonsterMapBossDifficulty implements DatType{
         @Offset(0) public int MapLevel; //i32
-        @Offset(4) public int Stat1Value; //i32
-        @Offset(8) public int Stat2Value; //i32
-        @Offset(12) public ForeignRow StatsKey1; //foreignrow
-        @Offset(28) public ForeignRow StatsKey2; //foreignrow
-        @Offset(44) public ForeignRow StatsKey3; //foreignrow
-        @Offset(60) public int Stat3Value; //i32
-        @Offset(64) public ForeignRow StatsKey4; //foreignrow
-        @Offset(80) public int Stat4Value; //i32
-        @Offset(84) public ForeignRow StatsKey5; //foreignrow
-        @Offset(100) public int Stat5Value; //i32
+        @Offset(4) public int BossLifePercentIncrease; //i32
+        @Offset(8) public int BossDamagePercentIncrease; //i32
+        @Offset(12) public ForeignRow Stat1; //foreignrow
+        @Offset(28) public ForeignRow Stat2; //foreignrow
+        @Offset(44) public ForeignRow Stat3; //foreignrow
+        @Offset(60) public int BossIncItemQuantity; //i32
+        @Offset(64) public ForeignRow Stat4; //foreignrow
+        @Offset(80) public int BossIncItemRarity; //i32
+        @Offset(84) public ForeignRow Stat5; //foreignrow
+        @Offset(100) public int BossAilmentPercentDecrease; //i32
     }
     public static class MonsterMapDifficulty implements DatType{
         @Offset(0) public int MapLevel; //i32
-        @Offset(4) public int Stat1Value; //i32
-        @Offset(8) public int Stat2Value; //i32
-        @Offset(12) public ForeignRow StatsKey1; //foreignrow
-        @Offset(28) public ForeignRow StatsKey2; //foreignrow
-        @Offset(44) public ForeignRow StatsKey3; //foreignrow
+        @Offset(4) public int LifePercentIncrease; //i32
+        @Offset(8) public int DamagePercentIncrease; //i32
+        @Offset(12) public ForeignRow Stat1; //foreignrow
+        @Offset(28) public ForeignRow Stat2; //foreignrow
+        @Offset(44) public ForeignRow Stat3; //foreignrow
         @Offset(60) public int Stat3Value; //i32
-        @Offset(64) public ForeignRow StatsKey4; //foreignrow
+        @Offset(64) public ForeignRow Stat4; //foreignrow
         @Offset(80) public int Stat4Value; //i32
     }
     public static class MonsterMortar implements DatType{
@@ -3686,20 +3748,25 @@ public class DatTypesV2 {
     public static class MonsterPackEntries implements DatType{
         @Offset(0) public String Id; //string
         @Offset(8) public ForeignRow MonsterPacksKey; //foreignrow
+        @Offset(24) public boolean Flag; //bool
+        @Offset(25) public int Weight; //i32
         @Offset(29) public ForeignRow MonsterVarietiesKey; //foreignrow
     }
     public static class MonsterPacks implements DatType{
         @Offset(0) public String Id; //string
-        @Offset(12) public List<ForeignRow> WorldAreasKeys; //foreignrow
-        @Offset(36) public int BossMonsterSpawnChance; //i32
-        @Offset(40) public int BossMonsterCount; //i32
-        @Offset(44) public List<ForeignRow> BossMonster_MonsterVarietiesKeys; //foreignrow
-        @Offset(93) public List<ForeignRow> TagsKeys; //foreignrow
-        @Offset(109) public int MinLevel; //i32
-        @Offset(113) public int MaxLevel; //i32
-        @Offset(117) public List<ForeignRow> WorldAreas2; //foreignrow
-        @Offset(137) public ForeignRow PackFormation; //foreignrow
-        @Offset(194) public ForeignRow NecropolisPack; //foreignrow
+        @Offset(8) public List<ForeignRow> WorldAreas; //foreignrow
+        @Offset(24) public int MinCount; //i32
+        @Offset(28) public int MaxCount; //i32
+        @Offset(32) public int BossMonsterSpawnChance; //i32
+        @Offset(36) public int BossCount; //i32
+        @Offset(40) public List<ForeignRow> BossMonsters; //foreignrow
+        @Offset(73) public List<String> Grounds; //string
+        @Offset(89) public List<ForeignRow> Tags; //foreignrow
+        @Offset(105) public int MinLevel; //i32
+        @Offset(109) public int MaxLevel; //i32
+        @Offset(129) public ForeignRow Formation; //foreignrow
+        @Offset(178) public List<ForeignRow> AdditionalMonsters; //foreignrow
+        @Offset(194) public List<Integer> AdditionalCounts; //i32
     }
     public static class MonsterProjectileAttack implements DatType{
         @Offset(0) public int Id; //i32
@@ -3753,48 +3820,54 @@ public class DatTypesV2 {
     }
     public static class MonsterVarieties implements DatType{
         @Offset(0) public String Id; //string
-        @Offset(8) public ForeignRow MonsterTypesKey; //foreignrow
+        @Offset(8) public ForeignRow MonsterType; //foreignrow
+        @Offset(24) public int MovementSpeed; //i32
         @Offset(28) public int ObjectSize; //i32
         @Offset(32) public int MinimumAttackDistance; //i32
         @Offset(36) public int MaximumAttackDistance; //i32
         @Offset(40) public List<String> ACTFiles; //string
         @Offset(56) public List<String> AOFiles; //string
         @Offset(72) public String BaseMonsterTypeIndex; //string
-        @Offset(80) public List<ForeignRow> ModsKeys; //foreignrow
+        @Offset(80) public List<ForeignRow> Mods; //foreignrow
         @Offset(116) public int ModelSizeMultiplier; //i32
-        @Offset(140) public List<ForeignRow> TagsKeys; //foreignrow
-        @Offset(156) public int ExperienceMultiplier; //i32
-        @Offset(188) public int CriticalStrikeChance; //i32
-        @Offset(196) public List<ForeignRow> GrantedEffectsKeys; //foreignrow
-        @Offset(212) public String AISFile; //string
-        @Offset(220) public List<ForeignRow> ModsKeys2; //foreignrow
-        @Offset(236) public String Stance; //string
-        @Offset(260) public String Name; //string
-        @Offset(268) public int DamageMultiplier; //i32
-        @Offset(272) public int LifeMultiplier; //i32
-        @Offset(276) public int AttackSpeed; //i32
-        @Offset(280) public List<ForeignRow> Weapon1_ItemVisualIdentityKeys; //foreignrow
-        @Offset(296) public List<ForeignRow> Weapon2_ItemVisualIdentityKeys; //foreignrow
-        @Offset(312) public ForeignRow Back_ItemVisualIdentityKey; //foreignrow
-        @Offset(328) public ForeignRow MainHand_ItemClassesKey; //foreignrow
-        @Offset(344) public ForeignRow OffHand_ItemClassesKey; //foreignrow
-        @Offset(360) public ForeignRow Helmet_ItemVisualIdentityKey; //foreignrow
-        @Offset(380) public List<ForeignRow> KillSpecificMonsterCount_AchievementItemsKeys; //foreignrow
-        @Offset(396) public List<ForeignRow> Special_ModsKeys; //foreignrow
-        @Offset(412) public List<ForeignRow> KillRare_AchievementItemsKeys; //foreignrow
-        @Offset(453) public short HASH16; //i16
-        @Offset(464) public ForeignRow KillWhileOnslaughtIsActive_AchievementItemsKey; //foreignrow
-        @Offset(480) public ForeignRow MonsterSegmentsKey; //foreignrow
-        @Offset(496) public ForeignRow MonsterArmoursKey; //foreignrow
-        @Offset(512) public ForeignRow KillWhileTalismanIsActive_AchievementItemsKey; //foreignrow
-        @Offset(528) public List<ForeignRow> Part1_ModsKeys; //foreignrow
-        @Offset(544) public List<ForeignRow> Part2_ModsKeys; //foreignrow
-        @Offset(560) public List<ForeignRow> Endgame_ModsKeys; //foreignrow
-        @Offset(636) public String SinkAnimation_AOFile; //string
-        @Offset(680) public String EPKFile; //string
-        @Offset(692) public ForeignRow MonsterConditionalEffectPacksKey; //foreignrow
-        @Offset(739) public List<String> AddonMonsterTypeIndex; //string
-        @Offset(776) public boolean BossHealthBar; //bool
+        @Offset(152) public List<ForeignRow> Tags; //foreignrow
+        @Offset(168) public int ExperienceMultiplier; //i32
+        @Offset(188) public int MinAgroRange; //i32
+        @Offset(192) public int MaxAgroRange; //i32
+        @Offset(196) public int SpotlightColour1; //i32
+        @Offset(200) public int SpotlightColour2; //i32
+        @Offset(204) public int SpotlightColour3; //i32
+        @Offset(208) public List<ForeignRow> GrantedEffects; //foreignrow
+        @Offset(224) public String AISFile; //string
+        @Offset(232) public List<ForeignRow> Mods2; //foreignrow
+        @Offset(248) public String Stance; //string
+        @Offset(272) public String Name; //string
+        @Offset(280) public int DamageMultiplier; //i32
+        @Offset(284) public int LifeMultiplier; //i32
+        @Offset(288) public int AttackSpeed; //i32
+        @Offset(292) public List<ForeignRow> Weapon1_ItemVisualIdentity; //foreignrow
+        @Offset(308) public List<ForeignRow> Weapon2_ItemVisualIdentity; //foreignrow
+        @Offset(324) public ForeignRow Back_ItemVisualIdentity; //foreignrow
+        @Offset(340) public ForeignRow MainHand_ItemClass; //foreignrow
+        @Offset(356) public ForeignRow OffHand_ItemClass; //foreignrow
+        @Offset(372) public ForeignRow Helmet_ItemVisualIdentity; //foreignrow
+        @Offset(392) public List<ForeignRow> KillSpecificMonsterCount_AchievementItems; //foreignrow
+        @Offset(408) public List<ForeignRow> Special_Mods; //foreignrow
+        @Offset(424) public List<ForeignRow> KillRare_AchievementItems; //foreignrow
+        @Offset(465) public short HASH16; //u16
+        @Offset(476) public ForeignRow KillWhileOnslaughtIsActive_AchievementItem; //foreignrow
+        @Offset(492) public ForeignRow MonsterSegment; //foreignrow
+        @Offset(508) public ForeignRow MonsterArmour; //foreignrow
+        @Offset(524) public ForeignRow KillWhileTalismanIsActive_AchievementItem; //foreignrow
+        @Offset(540) public List<ForeignRow> Part1_Mods; //foreignrow
+        @Offset(556) public List<ForeignRow> Part2_Mods; //foreignrow
+        @Offset(572) public List<ForeignRow> Endgame_Mods; //foreignrow
+        @Offset(628) public List<ForeignRow> MultiPartAchievements; //foreignrow
+        @Offset(648) public String SinkAnimation_AOFile; //string
+        @Offset(688) public int AilmentThreshold; //i32
+        @Offset(692) public int SinkEffect; //i32
+        @Offset(700) public ForeignRow MonsterConditionalEffectPack; //foreignrow
+        @Offset(771) public boolean BossHealthBar; //bool
     }
     public static class MonsterVarietiesArtVariations implements DatType{
         @Offset(0) public String Id; //string
@@ -3819,6 +3892,7 @@ public class DatTypesV2 {
     public static class MultiPartAchievements implements DatType{
         @Offset(0) public String Id; //string
         @Offset(12) public ForeignRow AchievementItemsKey; //foreignrow
+        @Offset(28) public int Threshold; //i32
     }
     public static class Music implements DatType{
         @Offset(0) public String Id; //string
@@ -3896,7 +3970,7 @@ public class DatTypesV2 {
         @Offset(100) public short HASH16; //i16
         @Offset(110) public ForeignRow Portrait; //foreignrow
         @Offset(126) public ForeignRow DialogueStyle; //foreignrow
-        @Offset(159) public String Gender; //string
+        @Offset(158) public String Gender; //string
     }
     public static class NPCShop implements DatType{
         @Offset(0) public String Id; //string
@@ -3927,11 +4001,8 @@ public class DatTypesV2 {
         @Offset(0) public String Id; //string
         @Offset(8) public List<ForeignRow> Characters; //foreignrow
         @Offset(24) public String Text; //string
-        @Offset(32) public String Mono_AudioFile; //string
-        @Offset(40) public String Stereo_AudioFile; //string
-        @Offset(48) public boolean HasStereo; //bool
-        @Offset(50) public String Video; //string
-        @Offset(70) public List<ForeignRow> NPCs; //foreignrow
+        @Offset(32) public List<String> AudioFiles; //string
+        @Offset(78) public List<ForeignRow> NPCs; //foreignrow
     }
     public static class OnKillAchievements implements DatType{
         @Offset(0) public ForeignRow MonsterVarietiesKey; //foreignrow
@@ -3949,6 +4020,7 @@ public class DatTypesV2 {
     public static class PassiveJewelSlots implements DatType{
         @Offset(0) public ForeignRow Slot; //foreignrow
         @Offset(16) public ForeignRow ClusterJewelSize; //foreignrow
+        @Offset(32) public int ClusterIndex; //i32
         @Offset(36) public long ReplacesSlot; //row
         @Offset(44) public ForeignRow ProxySlot; //foreignrow
         @Offset(60) public List<Integer> StartIndices; //i32
@@ -3999,12 +4071,52 @@ public class DatTypesV2 {
     }
     public static class PassiveSkillMasteryEffects implements DatType{
         @Offset(0) public String Id; //string
-        @Offset(8) public short HASH16; //i16
+        @Offset(8) public short HASH16; //u16
         @Offset(10) public List<ForeignRow> Stats; //foreignrow
         @Offset(26) public int Stat1Value; //i32
         @Offset(30) public int Stat2Value; //i32
         @Offset(34) public int Stat3Value; //i32
         @Offset(38) public ForeignRow AchievementItem; //foreignrow
+    }
+    public static class PassiveSkills implements DatType{
+        @Offset(0) public String Id; //string
+        @Offset(8) public String Icon_DDSFile; //string
+        @Offset(16) public List<ForeignRow> Stats; //foreignrow
+        @Offset(32) public int Stat1Value; //i32
+        @Offset(36) public int Stat2Value; //i32
+        @Offset(40) public int Stat3Value; //i32
+        @Offset(44) public int Stat4Value; //i32
+        @Offset(48) public short PassiveSkillGraphId; //u16
+        @Offset(50) public String Name; //string
+        @Offset(58) public List<ForeignRow> Characters; //foreignrow
+        @Offset(74) public boolean IsKeystone; //bool
+        @Offset(75) public boolean IsNotable; //bool
+        @Offset(76) public String FlavourText; //string
+        @Offset(84) public boolean IsJustIcon; //bool
+        @Offset(85) public ForeignRow AchievementItem; //foreignrow
+        @Offset(101) public boolean IsJewelSocket; //bool
+        @Offset(102) public ForeignRow Ascendancy; //foreignrow
+        @Offset(118) public boolean IsAscendancyStartingNode; //bool
+        @Offset(119) public List<ForeignRow> ReminderStrings; //foreignrow
+        @Offset(135) public int SkillPointsGranted; //i32
+        @Offset(139) public boolean IsMultipleChoice; //bool
+        @Offset(140) public boolean IsMultipleChoiceOption; //bool
+        @Offset(141) public int Stat5Value; //i32
+        @Offset(145) public List<ForeignRow> PassiveSkillBuffs; //foreignrow
+        @Offset(161) public boolean IsAnointmentOnly; //bool
+        @Offset(166) public boolean IsExpansion; //bool
+        @Offset(167) public boolean IsProxyPassive; //bool
+        @Offset(168) public int SkillType; //enumrow
+        @Offset(172) public ForeignRow MasteryGroup; //foreignrow
+        @Offset(188) public ForeignRow Group; //foreignrow
+        @Offset(204) public ForeignRow SoundEffect; //foreignrow
+        @Offset(220) public String AtlasnodeGroup; //string
+        @Offset(286) public ForeignRow KeystoneId; //foreignrow
+        @Offset(303) public boolean IsAttribute; //bool
+        @Offset(304) public ForeignRow AtlasSubTree; //foreignrow
+        @Offset(320) public boolean IsRootOfAtlasTree; //bool
+        @Offset(321) public ForeignRow GrantedSkill; //foreignrow
+        @Offset(337) public int WeaponPointsGranted; //i32
     }
     public static class PassiveSkillStatCategories implements DatType{
         @Offset(0) public String Id; //string
@@ -4128,8 +4240,10 @@ public class DatTypesV2 {
         @Offset(8) public int HASH32; //i32
     }
     public static class QuestItems implements DatType{
-        @Offset(0) public ForeignRow Item; //foreignrow
+        @Offset(0) public ForeignRow BaseItemType; //foreignrow
         @Offset(16) public ForeignRow TriggeredQuestFlag; //foreignrow
+        @Offset(70) public ForeignRow HelpText; //foreignrow
+        @Offset(86) public ForeignRow Description; //foreignrow
         @Offset(102) public String Script; //string
     }
     public static class QuestRewardOffers implements DatType{
@@ -4196,7 +4310,6 @@ public class DatTypesV2 {
         @Offset(20) public int MaxPrefix; //i32
         @Offset(28) public int MaxSuffix; //i32
         @Offset(32) public String Color; //string
-        @Offset(40) public String Text; //string
     }
     public static class Realms implements DatType{
         @Offset(0) public String Id; //string
@@ -4239,7 +4352,7 @@ public class DatTypesV2 {
         @Offset(0) public ForeignRow QuestFlag; //foreignrow
     }
     public static class ShieldTypes implements DatType{
-        @Offset(0) public ForeignRow BaseItemTypesKey; //foreignrow
+        @Offset(0) public ForeignRow BaseItemType; //foreignrow
         @Offset(16) public int Block; //i32
     }
     public static class ShopTag implements DatType{
@@ -4247,7 +4360,10 @@ public class DatTypesV2 {
         @Offset(8) public String Name; //string
         @Offset(16) public boolean IsCategory; //bool
         @Offset(17) public long Category; //row
-        @Offset(25) public List<ForeignRow> SkillGem; //foreignrow
+        @Offset(26) public String SubFlagArt; //string
+        @Offset(34) public boolean IsGuild; //bool
+        @Offset(35) public long Parent; //row
+        @Offset(43) public String CategoryArt; //string
     }
     public static class SigilDisplay implements DatType{
         @Offset(0) public String Id; //string
@@ -4274,16 +4390,20 @@ public class DatTypesV2 {
         @Offset(48) public List<ForeignRow> CharactersKeys; //foreignrow
     }
     public static class SkillGems implements DatType{
-        @Offset(0) public ForeignRow BaseItemTypesKey; //foreignrow
+        @Offset(0) public ForeignRow BaseItemType; //foreignrow
         @Offset(16) public int StrengthRequirementPercent; //i32
         @Offset(20) public int DexterityRequirementPercent; //i32
         @Offset(24) public int IntelligenceRequirementPercent; //i32
-        @Offset(28) public ForeignRow VaalVariant_BaseItemTypesKey; //foreignrow
+        @Offset(28) public ForeignRow VaalVariant_BaseItemType; //foreignrow
         @Offset(44) public boolean IsVaalVariant; //bool
         @Offset(45) public ForeignRow MinionGlobalSkillLevelStat; //foreignrow
         @Offset(61) public int GemType; //i32
+        @Offset(67) public ForeignRow Awakened; //foreignrow
+        @Offset(83) public int GemColour; //i32
+        @Offset(87) public int MinLevelReq; //i32
         @Offset(91) public ForeignRow ItemExperienceType; //foreignrow
         @Offset(107) public List<ForeignRow> CraftingTypes; //foreignrow
+        @Offset(123) public List<ForeignRow> MtxSlotTypes; //foreignrow
         @Offset(140) public List<ForeignRow> GemEffects; //foreignrow
         @Offset(157) public String TutorialVideo; //string
         @Offset(165) public String UI_Image; //string
@@ -4368,16 +4488,18 @@ public class DatTypesV2 {
         @Offset(0) public String Id; //string
         @Offset(9) public boolean IsLocal; //bool
         @Offset(10) public boolean IsWeaponLocal; //bool
-        @Offset(11) public int Semantics; //enumrow
+        @Offset(11) public int Semantic; //enumrow
         @Offset(15) public String Text; //string
         @Offset(24) public boolean IsVirtual; //bool
-        @Offset(25) public long MainHandAlias_StatsKey; //row
-        @Offset(33) public long OffHandAlias_StatsKey; //row
-        @Offset(42) public int HASH32; //i32
-        @Offset(46) public List<String> BelongsActiveSkillsKey; //string
+        @Offset(25) public long MainHandAlias_Stat; //row
+        @Offset(33) public long OffHandAlias_Stat; //row
+        @Offset(42) public int HASH32; //u32
+        @Offset(46) public List<String> BelongsActiveSkills; //string
         @Offset(62) public ForeignRow Category; //foreignrow
         @Offset(80) public boolean IsScalable; //bool
         @Offset(81) public List<ForeignRow> ContextFlags; //foreignrow
+        @Offset(97) public List<ForeignRow> DotFlag; //foreignrow
+        @Offset(113) public boolean WeaponHandCheck; //bool
     }
     public static class SuicideExplosion implements DatType{
         @Offset(0) public int Id; //i32
@@ -4413,7 +4535,7 @@ public class DatTypesV2 {
     }
     public static class Tags implements DatType{
         @Offset(0) public String Id; //string
-        @Offset(8) public int HASH32; //i32
+        @Offset(8) public int HASH32; //u32
         @Offset(12) public String DisplayString; //string
         @Offset(36) public String UiHints; //string
     }
@@ -4549,12 +4671,13 @@ public class DatTypesV2 {
         @Offset(0) public String Id; //string
     }
     public static class WeaponTypes implements DatType{
-        @Offset(0) public ForeignRow BaseItemTypesKey; //foreignrow
+        @Offset(0) public ForeignRow BaseItemType; //foreignrow
         @Offset(16) public int Critical; //i32
         @Offset(36) public int Speed; //i32
         @Offset(40) public int DamageMin; //i32
         @Offset(44) public int DamageMax; //i32
         @Offset(48) public int RangeMax; //i32
+        @Offset(52) public int ReloadTime; //i32
     }
     public static class WindowCursors implements DatType{
         @Offset(0) public String Id; //string
@@ -4578,43 +4701,19 @@ public class DatTypesV2 {
         @Offset(16) public int Act; //i32
         @Offset(20) public boolean IsTown; //bool
         @Offset(21) public boolean HasWaypoint; //bool
-        @Offset(22) public List<Long> Connections_WorldAreasKeys; //row
+        @Offset(22) public List<Long> Connections; //row
         @Offset(38) public int AreaLevel; //i32
         @Offset(42) public short HASH16; //i16
-        @Offset(52) public String LoadingScreen_DDSFile; //string
-        @Offset(96) public List<ForeignRow> TopologiesKeys; //foreignrow
-        @Offset(112) public long ParentTown_WorldAreasKey; //row
-        @Offset(156) public List<ForeignRow> Bosses_MonsterVarietiesKeys; //foreignrow
-        @Offset(172) public List<ForeignRow> Monsters_MonsterVarietiesKeys; //foreignrow
-        @Offset(188) public List<ForeignRow> SpawnWeight_TagsKeys; //foreignrow
-        @Offset(204) public List<Integer> SpawnWeight_Values; //i32
-        @Offset(220) public boolean IsMapArea; //bool
-        @Offset(221) public List<ForeignRow> FullClear_AchievementItemsKeys; //foreignrow
-        @Offset(253) public ForeignRow AchievementItemsKey; //foreignrow
-        @Offset(269) public List<ForeignRow> ModsKeys; //foreignrow
-        @Offset(289) public List<Long> VaalArea; //row
-        @Offset(306) public int MaxLevel; //i32
-        @Offset(310) public List<ForeignRow> AreaTypeTags; //foreignrow
-        @Offset(326) public boolean IsHideout; //bool
-        @Offset(327) public String Inflection; //string
-        @Offset(343) public List<ForeignRow> Tags; //foreignrow
-        @Offset(359) public boolean IsVaalArea; //bool
-        @Offset(360) public boolean IsLabyrinthAirlock; //bool
-        @Offset(361) public boolean IsLabyrinthArea; //bool
-        @Offset(362) public ForeignRow TwinnedFullClear_AchievementItemsKey; //foreignrow
-        @Offset(378) public ForeignRow Enter_AchievementItemsKey; //foreignrow
-        @Offset(394) public String TSIFile; //string
-        @Offset(418) public List<ForeignRow> WaypointActivation_AchievementItemsKeys; //foreignrow
-        @Offset(434) public boolean IsUniqueMapArea; //bool
-        @Offset(435) public boolean IsLabyrinthBossArea; //bool
-        @Offset(436) public ForeignRow FirstEntry_NPCTextAudioKey; //foreignrow
-        @Offset(452) public ForeignRow FirstEntry_SoundEffectsKey; //foreignrow
-        @Offset(468) public String FirstEntry_NPCsKey; //string
-        @Offset(480) public ForeignRow EnvironmentsKey; //foreignrow
-        @Offset(546) public ForeignRow LeagueChance1; //foreignrow
-        @Offset(566) public ForeignRow LeagueChance2; //foreignrow
-        @Offset(598) public ForeignRow Ruleset; //foreignrow
-        @Offset(618) public ForeignRow QuestFlag; //foreignrow
+        @Offset(52) public List<String> LoadingScreens; //string
+        @Offset(68) public List<ForeignRow> FlagOnEntered; //foreignrow
+        @Offset(84) public List<ForeignRow> RequiredFlags; //foreignrow
+        @Offset(104) public List<ForeignRow> Topologies; //foreignrow
+        @Offset(120) public long ParentTown; //row
+        @Offset(164) public List<ForeignRow> Bosses; //foreignrow
+        @Offset(277) public List<ForeignRow> AreaMods; //foreignrow
+        @Offset(315) public List<ForeignRow> Tags; //foreignrow
+        @Offset(448) public ForeignRow Environment; //foreignrow
+        @Offset(468) public ForeignRow TerrainPlugins; //foreignrow
     }
     public static class WorldAreaLeagueChances implements DatType{
         @Offset(0) public String Id; //string
@@ -4642,6 +4741,7 @@ public class DatTypesV2 {
         @Offset(0) public String Id; //string
         @Offset(8) public ForeignRow ItemVisualIdentity; //foreignrow
         @Offset(24) public ForeignRow ItemClass; //foreignrow
+        @Offset(40) public int MinLevelReq; //i32
     }
     public static class AtlasMemoryLine implements DatType{
         @Offset(0) public String League; //string
@@ -4750,7 +4850,7 @@ public class DatTypesV2 {
         @Offset(32) public String SupportText; //string
         @Offset(40) public String SupportName; //string
         @Offset(48) public List<ForeignRow> GemTags; //foreignrow
-        @Offset(64) public ForeignRow Consumed_ModsKey; //foreignrow
+        @Offset(64) public ForeignRow Consumed_Mod; //foreignrow
         @Offset(80) public int ItemColor; //i32
         @Offset(100) public List<ForeignRow> AdditionalGrantedEffects; //foreignrow
     }
@@ -4843,6 +4943,8 @@ public class DatTypesV2 {
     }
     public static class MinionType implements DatType{
         @Offset(0) public String Id; //string
+        @Offset(8) public ForeignRow LimitStat; //foreignrow
+        @Offset(24) public ForeignRow ActiveCountStat; //foreignrow
     }
     public static class MonsterStatueOverrides implements DatType{
     }
@@ -4878,6 +4980,9 @@ public class DatTypesV2 {
     public static class StatisticTrackingMicrotransactionsStatistics implements DatType{
     }
     public static class StatsFromSkillStats implements DatType{
+        @Offset(0) public ForeignRow SkillCondition; //foreignrow
+        @Offset(16) public ForeignRow GrantedFlag; //foreignrow
+        @Offset(32) public boolean FlagValue; //bool
     }
     public static class StatVisuals implements DatType{
         @Offset(16) public List<String> EPKFiles; //string
@@ -4913,6 +5018,21 @@ public class DatTypesV2 {
         @Offset(24) public String Name; //string
         @Offset(32) public String Icon; //string
     }
+    public static class MapRelicInventoryLayout implements DatType{
+        @Offset(0) public int XOffset; //i32
+        @Offset(4) public int YOffset; //i32
+        @Offset(8) public int UnlockQuest; //i32
+        @Offset(12) public String UnlockText; //string
+    }
+    public static class UniqueMapRelicLimits implements DatType{
+        @Offset(0) public ForeignRow Idol; //foreignrow
+        @Offset(16) public int Limit; //i32
+    }
+    public static class ActiveSkillWeaponRequirement implements DatType{
+        @Offset(0) public String Id; //string
+        @Offset(8) public List<ForeignRow> WieldableClasses; //foreignrow
+        @Offset(24) public ForeignRow String; //foreignrow
+    }
     public static class AtlasPassiveSkillSubTrees implements DatType{
         @Offset(0) public String Id; //string
         @Offset(8) public String UI_Image; //string
@@ -4922,6 +5042,12 @@ public class DatTypesV2 {
         @Offset(32) public int CounterX; //i32
         @Offset(36) public int CounterY; //i32
     }
+    public static class AttributeRequirements implements DatType{
+        @Offset(0) public ForeignRow BaseItemType; //foreignrow
+        @Offset(16) public int ReqStr; //i32
+        @Offset(20) public int ReqInt; //i32
+        @Offset(24) public int ReqDex; //i32
+    }
     public static class Chanceableitemclasses implements DatType{
         @Offset(0) public ForeignRow ItemClass; //foreignrow
     }
@@ -4929,7 +5055,74 @@ public class DatTypesV2 {
     }
     public static class CharacterCreationDialogue implements DatType{
     }
+    public static class CharacterMeleeSkills implements DatType{
+        @Offset(32) public ForeignRow SkillGem; //foreignrow
+    }
+    public static class ClassPassiveSkillOverrides implements DatType{
+        @Offset(0) public ForeignRow CharacterToOverrideFor; //foreignrow
+        @Offset(16) public ForeignRow SkillToOverride; //foreignrow
+        @Offset(32) public ForeignRow Override; //foreignrow
+    }
+    public static class CraftableModTypes implements DatType{
+        @Offset(0) public ForeignRow ModType; //foreignrow
+        @Offset(16) public short HASH16; //u16
+    }
     public static class EndgameCorruptionMods implements DatType{
+        @Offset(0) public ForeignRow CorruptionMod; //foreignrow
+        @Offset(16) public List<Integer> SpawnWeight; //i32
+    }
+    public static class EndgameMapBiomes implements DatType{
+        @Offset(0) public String Id; //string
+        @Offset(16) public String GroundType1; //string
+        @Offset(40) public String GroundType2; //string
+        @Offset(84) public String GroundTypeCorrupted1; //string
+        @Offset(92) public String GroundTypeCorrupted2; //string
+    }
+    public static class EndgameMapCompletionQuests implements DatType{
+        @Offset(0) public String Id; //string
+        @Offset(8) public int RequiredTier; //i32
+        @Offset(12) public int RequiredCount; //i32
+    }
+    public static class EndgameMapContent implements DatType{
+        @Offset(0) public String Id; //string
+        @Offset(8) public List<Integer> SpawnChance; //i32
+        @Offset(40) public List<ForeignRow> InherentStat; //foreignrow
+        @Offset(72) public String Icon; //string
+        @Offset(80) public ForeignRow PrecursorTabletStat; //foreignrow
+        @Offset(96) public List<ForeignRow> Stats; //foreignrow
+        @Offset(112) public List<Integer> StatsValues; //i32
+        @Offset(128) public String Description; //string
+        @Offset(136) public String Name; //string
+    }
+    public static class EndgameMapContentSet implements DatType{
+        @Offset(0) public String Id; //string
+        @Offset(8) public List<ForeignRow> Content; //foreignrow
+    }
+    public static class EndgameMapDecorations implements DatType{
+        @Offset(0) public String Id; //string
+        @Offset(8) public String AnimatedObject; //string
+        @Offset(16) public List<String> AdditionalAnimatedObjects; //string
+    }
+    public static class EndgameMapPins implements DatType{
+        @Offset(0) public String Id; //string
+        @Offset(8) public ForeignRow UnavailablePin; //foreignrow
+        @Offset(24) public ForeignRow AvailablePin; //foreignrow
+        @Offset(40) public ForeignRow ActivePin; //foreignrow
+        @Offset(56) public ForeignRow FailedPin; //foreignrow
+        @Offset(72) public ForeignRow CompletePin; //foreignrow
+    }
+    public static class EndgameMaps implements DatType{
+        @Offset(4) public List<ForeignRow> Biomes; //foreignrow
+        @Offset(20) public List<ForeignRow> AdjacentBiomes; //foreignrow
+        @Offset(36) public ForeignRow WorldAreaBoss; //foreignrow
+        @Offset(52) public ForeignRow WorldArea; //foreignrow
+        @Offset(68) public List<Integer> NaturalSpawnWeight; //i32
+        @Offset(84) public List<ForeignRow> NativePacks; //foreignrow
+        @Offset(100) public String FlavourText; //string
+        @Offset(108) public int MinWatchstoneTier; //i32
+        @Offset(116) public ForeignRow MapPin; //foreignrow
+        @Offset(132) public ForeignRow MapDecoration; //foreignrow
+        @Offset(164) public ForeignRow CorruptedMapPin; //foreignrow
     }
     public static class GoldModPrices implements DatType{
         @Offset(0) public ForeignRow Mod; //foreignrow
@@ -4938,17 +5131,17 @@ public class DatTypesV2 {
         @Offset(48) public List<Integer> SpawnWeight; //i32
         @Offset(64) public ForeignRow CraftableType; //foreignrow
     }
-    public static class CraftableModTypes implements DatType{
-        @Offset(0) public ForeignRow ModType; //foreignrow
-        @Offset(16) public short HASH16; //u16
+    public static class GrantedEffectLabels implements DatType{
+        @Offset(0) public String Id; //string
+        @Offset(8) public String Text; //string
     }
     public static class ItemInherentSkills implements DatType{
-        @Offset(0) public ForeignRow BaseItemTypes; //foreignrow
+        @Offset(0) public ForeignRow BaseItemType; //foreignrow
         @Offset(16) public List<ForeignRow> SkillsGranted; //foreignrow
         @Offset(32) public boolean IsWeapon; //bool
     }
     public static class ItemSpirit implements DatType{
-        @Offset(0) public ForeignRow BaseItemTypes; //foreignrow
+        @Offset(0) public ForeignRow BaseItemType; //foreignrow
         @Offset(16) public int SpiritGranted; //i32
     }
     public static class KeywordPopups implements DatType{
@@ -4956,56 +5149,87 @@ public class DatTypesV2 {
         @Offset(8) public String Term; //string
         @Offset(16) public String Definition; //string
     }
-    public static class PassiveSkills implements DatType{
+    public static class ModGrantedSkills implements DatType{
+        @Offset(0) public ForeignRow Mod; //foreignrow
+        @Offset(16) public ForeignRow Skill; //foreignrow
+    }
+    public static class RitualStashTabLayout implements DatType{
         @Offset(0) public String Id; //string
-        @Offset(8) public String Icon_DDSFile; //string
-        @Offset(16) public List<ForeignRow> Stats; //foreignrow
-        @Offset(32) public int Stat1Value; //i32
-        @Offset(36) public int Stat2Value; //i32
-        @Offset(40) public int Stat3Value; //i32
-        @Offset(44) public int Stat4Value; //i32
-        @Offset(48) public short PassiveSkillGraphId; //u16
-        @Offset(50) public String Name; //string
-        @Offset(58) public List<ForeignRow> Characters; //foreignrow
-        @Offset(74) public boolean IsKeystone; //bool
-        @Offset(75) public boolean IsNotable; //bool
-        @Offset(76) public String FlavourText; //string
-        @Offset(84) public boolean IsJustIcon; //bool
-        @Offset(85) public ForeignRow AchievementItem; //foreignrow
-        @Offset(101) public boolean IsJewelSocket; //bool
-        @Offset(102) public ForeignRow AscendancyKey; //foreignrow
-        @Offset(118) public boolean IsAscendancyStartingNode; //bool
-        @Offset(119) public List<ForeignRow> ReminderStrings; //foreignrow
-        @Offset(135) public int SkillPointsGranted; //i32
-        @Offset(139) public boolean IsMultipleChoice; //bool
-        @Offset(140) public boolean IsMultipleChoiceOption; //bool
-        @Offset(141) public int Stat5Value; //i32
-        @Offset(145) public List<ForeignRow> PassiveSkillBuffs; //foreignrow
-        @Offset(161) public boolean IsAnointmentOnly; //bool
-        @Offset(166) public boolean IsExpansion; //bool
-        @Offset(167) public boolean IsProxyPassive; //bool
-        @Offset(168) public int SkillType; //enumrow
-        @Offset(172) public ForeignRow MasteryGroup; //foreignrow
-        @Offset(188) public ForeignRow Group; //foreignrow
-        @Offset(204) public ForeignRow SoundEffect; //foreignrow
-        @Offset(286) public ForeignRow KeystoneId; //foreignrow
-        @Offset(303) public boolean IsAttribute; //bool
-        @Offset(304) public ForeignRow AtlasSubTree; //foreignrow
-        @Offset(320) public boolean IsRootOfAtlasTree; //bool
-        @Offset(321) public ForeignRow GrantedSkill; //foreignrow
-        @Offset(337) public int WeaponPointsGranted; //i32
+        @Offset(8) public ForeignRow StoredItem; //foreignrow
+        @Offset(24) public int XOffset; //i32
+        @Offset(28) public int YOffset; //i32
+        @Offset(32) public int FirstSlotIndex; //i32
+        @Offset(36) public int Width; //i32
+        @Offset(40) public int Height; //i32
+    }
+    public static class ShapeShiftForms implements DatType{
+        @Offset(0) public String Id; //string
+        @Offset(8) public String AOFile; //string
+        @Offset(16) public String ACTFile; //string
+        @Offset(24) public ForeignRow Source; //foreignrow
+        @Offset(40) public ForeignRow Destination; //foreignrow
+        @Offset(56) public List<ForeignRow> StatsKeys; //foreignrow
+        @Offset(72) public List<Integer> StatsValues; //i32
+        @Offset(132) public ForeignRow SkillStat; //foreignrow
+        @Offset(153) public String Status; //string
+    }
+    public static class SkillCraftingData implements DatType{
+        @Offset(0) public String Id; //string
+        @Offset(8) public ForeignRow Character; //foreignrow
+        @Offset(24) public String ListBackground; //string
+        @Offset(32) public String Icon; //string
+        @Offset(40) public String ConsoleIcon; //string
+        @Offset(48) public String Name; //string
     }
     public static class SkillGemSupports implements DatType{
-        @Offset(0) public ForeignRow SkillGemsKey; //foreignrow
+        @Offset(0) public ForeignRow SkillGem; //foreignrow
         @Offset(16) public List<ForeignRow> Supports; //foreignrow
     }
     public static class SkillGemsForUniqueStat implements DatType{
-        @Offset(0) public int id; //i32
-        @Offset(4) public List<ForeignRow> gems; //foreignrow
+        @Offset(0) public int Index; //i32
+        @Offset(4) public List<ForeignRow> SkillGems; //foreignrow
+    }
+    public static class SocketableStashTabLayout implements DatType{
+        @Offset(0) public String Id; //string
+        @Offset(8) public ForeignRow StoredItem; //foreignrow
+        @Offset(24) public int XOffset; //i32
+        @Offset(28) public int YOffset; //i32
+        @Offset(32) public int FirstSlotIndex; //i32
+        @Offset(36) public int Width; //i32
+        @Offset(40) public int Height; //i32
+    }
+    public static class SoulCores implements DatType{
+        @Offset(0) public ForeignRow BaseItemType; //foreignrow
+        @Offset(16) public List<ForeignRow> StatsMartialWeapon; //foreignrow
+        @Offset(32) public List<Integer> StatsValuesMartialWeapon; //i32
+        @Offset(48) public List<ForeignRow> StatsArmour; //foreignrow
+        @Offset(64) public List<Integer> StatsValuesArmour; //i32
+        @Offset(80) public int Rank; //i32
+        @Offset(84) public List<ForeignRow> StatsCasterWeapon; //foreignrow
+        @Offset(100) public List<Integer> StatsValuesCasterWeapon; //i32
+        @Offset(116) public List<ForeignRow> StatsAllEquipment; //foreignrow
+        @Offset(132) public List<Integer> StatsValuesAllEquipment; //i32
+    }
+    public static class SoulCoresPerClass implements DatType{
+        @Offset(0) public ForeignRow BaseItemType; //foreignrow
+        @Offset(16) public ForeignRow ItemClass; //foreignrow
+        @Offset(32) public List<ForeignRow> Stats; //foreignrow
+        @Offset(48) public List<Integer> StatsValues; //i32
     }
     public static class SupportGems implements DatType{
-        @Offset(0) public ForeignRow SkillGemsKey; //foreignrow
+        @Offset(0) public ForeignRow SkillGem; //foreignrow
         @Offset(20) public String Icon; //string
+    }
+    public static class UltimatumTrialLength implements DatType{
+        @Offset(0) public int MinAreaLevel; //i32
+        @Offset(4) public int Length; //i32
+    }
+    public static class UltimatumWagerTypes implements DatType{
+        @Offset(0) public String Id; //string
+        @Offset(8) public short HASH16; //u16
+        @Offset(10) public ForeignRow CurrencyItem; //foreignrow
+        @Offset(26) public int Count; //i32
+        @Offset(30) public String DisplayText; //string
     }
     public static class UncutGemAdditionalTiers implements DatType{
         @Offset(0) public ForeignRow BaseItemType; //foreignrow
@@ -5018,47 +5242,13 @@ public class DatTypesV2 {
         @Offset(16) public int Tier; //i32
         @Offset(20) public int AreaLevel; //i32
     }
-    public static class ClassPassiveSkillOverrides implements DatType{
-        @Offset(0) public ForeignRow CharacterToOverrideFor; //foreignrow
-        @Offset(16) public ForeignRow SkillToOverride; //foreignrow
-        @Offset(32) public ForeignRow Override; //foreignrow
-    }
-    public static class AttributeRequirements implements DatType{
-        @Offset(0) public ForeignRow BaseItemTypesKey; //foreignrow
-        @Offset(16) public int ReqStr; //i32
-        @Offset(20) public int ReqInt; //i32
-        @Offset(24) public int ReqDex; //i32
-    }
-    public static class BeltTypes implements DatType{
-        @Offset(0) public ForeignRow BaseItem; //foreignrow
-        @Offset(16) public int CharmSlots; //i32
-    }
-    public static class CharacterMeleeSkills implements DatType{
-        @Offset(32) public ForeignRow SkillGemsKey; //foreignrow
-    }
-    public static class GrantedEffectLabels implements DatType{
-        @Offset(0) public String Id; //string
-        @Offset(8) public String Text; //string
-    }
-    public static class SkillCraftingData implements DatType{
-        @Offset(0) public String Id; //string
-        @Offset(8) public ForeignRow CharactersKey; //foreignrow
-        @Offset(24) public String ListBackground; //string
-        @Offset(32) public String Icon; //string
-        @Offset(40) public String ConsoleIcon; //string
-        @Offset(48) public String Name; //string
-    }
-    public static class SoulCores implements DatType{
-        @Offset(0) public ForeignRow BaseItemTypesKey; //foreignrow
-        @Offset(16) public List<ForeignRow> StatsKeysWeapon; //foreignrow
-        @Offset(32) public List<Integer> StatsValuesWeapon; //i32
-        @Offset(48) public List<ForeignRow> StatsKeysArmour; //foreignrow
-        @Offset(64) public List<Integer> StatsValuesArmour; //i32
-    }
     public static class UtilityFlaskBuffs implements DatType{
-        @Offset(0) public ForeignRow BuffDefinitionsKey; //foreignrow
+        @Offset(0) public ForeignRow BuffDefinition; //foreignrow
         @Offset(16) public List<Integer> StatValues; //i32
         @Offset(32) public List<Integer> StatValues2; //i32
+    }
+    public static class WieldableClasses implements DatType{
+        @Offset(0) public ForeignRow ItemClass; //foreignrow
     }
     public static final List<Class<? extends DatType>> TYPES = List.of(
         AbyssBossLifeScalingPerLevel.class,
@@ -5071,6 +5261,7 @@ public class DatTypesV2 {
         ActionTypes.class,
         ActiveSettings.class,
         ActiveSkillType.class,
+        ActiveSkillWeaponRequirement.class,
         ActiveSkills.class,
         Acts.class,
         AddBuffToTargetVarieties.class,
@@ -5159,7 +5350,6 @@ public class DatTypesV2 {
         BattlePassRewards.class,
         BattlePassTracks.class,
         BattlePasses.class,
-        BeltTypes.class,
         BestiaryCapturableMonsters.class,
         BestiaryEncounters.class,
         BestiaryFamilies.class,
@@ -5315,6 +5505,13 @@ public class DatTypesV2 {
         ElderGuardians.class,
         ElderMapBossOverride.class,
         EndgameCorruptionMods.class,
+        EndgameMapBiomes.class,
+        EndgameMapCompletionQuests.class,
+        EndgameMapContent.class,
+        EndgameMapContentSet.class,
+        EndgameMapDecorations.class,
+        EndgameMapPins.class,
+        EndgameMaps.class,
         EndlessLedgeChests.class,
         EntityInfobarStyle.class,
         EnvironmentTransitions.class,
@@ -5536,6 +5733,7 @@ public class DatTypesV2 {
         MapInhabitants.class,
         MapPins.class,
         MapPurchaseCosts.class,
+        MapRelicInventoryLayout.class,
         MapSeries.class,
         MapSeriesTiers.class,
         MapStashSpecialTypeEntries.class,
@@ -5593,6 +5791,7 @@ public class DatTypesV2 {
         ModEffectStats.class,
         ModEquivalencies.class,
         ModFamily.class,
+        ModGrantedSkills.class,
         ModSellPriceTypes.class,
         ModType.class,
         Mods.class,
@@ -5722,6 +5921,7 @@ public class DatTypesV2 {
         RitualRuneTypes.class,
         RitualSetKillAchievements.class,
         RitualSpawnPatterns.class,
+        RitualStashTabLayout.class,
         RogueExileLifeScalingPerLevel.class,
         RogueExiles.class,
         Rulesets.class,
@@ -5754,6 +5954,7 @@ public class DatTypesV2 {
         SentinelStorageLayout.class,
         SentinelTaggedMonsterStats.class,
         SessionQuestFlags.class,
+        ShapeShiftForms.class,
         ShaperGuardians.class,
         ShieldTypes.class,
         ShopTag.class,
@@ -5768,6 +5969,7 @@ public class DatTypesV2 {
         SkillGemLevelUpEffects.class,
         SkillGemSupports.class,
         SkillGems.class,
+        SkillGemsForUniqueStat.class,
         SkillMineVariations.class,
         SkillMorphDisplay.class,
         SkillSurgeEffects.class,
@@ -5775,7 +5977,9 @@ public class DatTypesV2 {
         SkillTrapVariations.class,
         SkillWeaponEffects.class,
         SocketNotches.class,
+        SocketableStashTabLayout.class,
         SoulCores.class,
+        SoulCoresPerClass.class,
         SoundEffects.class,
         SpawnAdditionalChestsOrClusters.class,
         SpawnObject.class,
@@ -5849,11 +6053,14 @@ public class DatTypesV2 {
         UltimatumMapModifiers.class,
         UltimatumModifierTypes.class,
         UltimatumModifiers.class,
+        UltimatumTrialLength.class,
         UltimatumTrialMasterAudio.class,
+        UltimatumWagerTypes.class,
         UncutGemAdditionalTiers.class,
         UncutGemTiers.class,
         UniqueChests.class,
         UniqueJewelLimits.class,
+        UniqueMapRelicLimits.class,
         UniqueMaps.class,
         UniqueStashLayout.class,
         UniqueStashTypes.class,
@@ -5882,11 +6089,11 @@ public class DatTypesV2 {
         WeaponPassiveTreeBalancePerItemLevel.class,
         WeaponPassiveTreeUniqueBaseTypes.class,
         WeaponTypes.class,
+        WieldableClasses.class,
         WindowCursors.class,
         Words.class,
         WorldAreaLeagueChances.class,
         WorldAreas.class,
-        WorldPopupIconTypes.class,
-            SkillGemsForUniqueStat.class
+        WorldPopupIconTypes.class
     );
 }

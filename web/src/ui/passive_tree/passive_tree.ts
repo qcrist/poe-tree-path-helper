@@ -1,6 +1,12 @@
-import {Application, Assets, Container, Graphics, PointData, Sprite} from "pixi.js";
+import {Application, Assets, Container, Graphics, PointData, Sprite, Texture} from "pixi.js";
 
-import {loadTree, loadTreeIcons, passive_tree_json_node, passive_tree_json_type} from "#src/ui/passive_tree/raw_tree";
+import {
+    load_export_zip,
+    loadTree,
+    loadTreeIcons,
+    passive_tree_json_node,
+    passive_tree_json_type
+} from "#src/ui/passive_tree/raw_tree";
 import {SelectionType, store, subscribeAndRunNow} from "#src/ui/state/store";
 import {new_timer, time, TimerObj} from "#src/util/timer";
 import {proxy, transfer} from "comlink";
@@ -70,6 +76,7 @@ function listBadNodes(tree: passive_tree_json_type): ReadonlySet<number> {
         if (node.isJustIcon)
             disabled_nodes.add(node.id);
         if (node.isAscendancyStartingNode) {
+            if (node.isRootNode) continue;
             const todo = [node.id];
             const added = new Set<number>(todo);
             let i = 0;
@@ -143,9 +150,8 @@ function load_position() {
 export async function init_tree() {
     const timer = new_timer(init_tree);
 
-    const {tree, solver} = await wait_obj({
-        tree: timer.timeFnAsync(loadTree),
-        icons_map: timer.timeFnAsync(loadTreeIcons),
+    const {load_zip: {tree, textures}, solver} = await wait_obj({
+        load_zip: timer.timeFnAsync(load_export_zip),
         solver: timer.timeFnAsync(init_solve_worker)
     });
 
@@ -157,6 +163,14 @@ export async function init_tree() {
     const disabled_nodes = timer.timeFn(listBadNodes, tree);
     const graph = timer.time("tree_graph", () => new TreeGraph(tree, disabled_nodes));
     const graph_transfer_promise = timer.timeAsync("transfer_conn", t => graph.transfer_conn(t, solver));
+
+    function load_texture(name: string) {
+        if (name in textures) {
+            return textures[name];
+        }
+        console.error("failed to load texture: ", name);
+        return new Texture()
+    }
 
 
     // store.getState().toggleNode(graph.nodes[4].id, SelectionType.BLOCK);
@@ -211,16 +225,22 @@ export async function init_tree() {
     async function new_frame(p: passive_tree_json_node) {
         let tex_path: string;
         if (p.isNotable)
-            tex_path = tree.frames.NotableFrameNormal;
+            tex_path = "NotableFrameCanAllocate";
         else if (p.isKeystone)
-            tex_path = tree.frames.KeystoneFrameNormal;
-        else
-            tex_path = tree.frames.PassiveFrameNormal;
+            tex_path = "KeystoneFrameCanAllocate";
+        else if (p.isWormhole)
+            tex_path = "WormholeFrameCanAllocate";
+        else if (p.isMastery) {
+            return null;
+        } else
+            tex_path = "PSSkillFrameHighlighted";
 
-        let tex = await Assets.load(tex_path);
+
+        let tex = load_texture(tex_path);
         if (tex === undefined)
             throw new Error("failed to find frame!");
         const sp = new Sprite(tex);
+        sp.scale = tree.scale;
         sp.anchor.set(0.5);
         return sp;
     }
@@ -228,7 +248,7 @@ export async function init_tree() {
     function get_radius(p: passive_tree_json_node) {
         if (p.isNotable)
             return 70;
-        else if (p.isKeystone)
+        else if (p.isKeystone || p.isWormhole)
             return 105;
         return 45;
     }
@@ -323,9 +343,14 @@ export async function init_tree() {
     }
 
     function build_connection(a: number, b: number) {
+        if (tree.nodes[a].isMastery || tree.nodes[b].isMastery)
+            return;
+        if (tree.nodes[a].isWormhole && tree.nodes[b].isWormhole)
+            return;
+
         const graphics = new Graphics();
 
-        const {x: x1, y: y1} = tree.nodes[a]!;
+        const {x: x1, y: y1} = tree.nodes[a];
         const {x: x2, y: y2} = tree.nodes[b];
 
         graphics.moveTo(x1, y1);
@@ -346,7 +371,7 @@ export async function init_tree() {
     }
 
     async function build_node(container: Container, p: passive_tree_json_node) {
-        const ico = await Assets.load(p.icon);
+        const ico = load_texture(p.icon);
         const node = new Sprite(ico);
         node.anchor.set(0.5);
         const {x, y} = p;
@@ -367,6 +392,7 @@ export async function init_tree() {
                         obj[r] = SelectionType.ROOT;
                     }
                 });
+                console.log(obj, tree.root_passives);
                 store.getState().bulkSet(obj);
                 return;
             }
@@ -386,7 +412,7 @@ export async function init_tree() {
             store.getState().setTooltip({
                 title: p.name,
                 lines: p.stats,
-                ...container.parent.toGlobal(container.position)
+                ...container.parent!.toGlobal(container.position)
             });
         });
         container.on("mouseleave", _ => {
@@ -401,25 +427,33 @@ export async function init_tree() {
         });
         container.eventMode = "static";
         container.cursor = "pointer";
-        const f = await new_frame(p);
-
-        const s = Math.min(f.width, f.height) * .65;
-        node.width = node.height = s;
-
-        // container.scale = 1.2;
-
         container.addChild(node);
-        container.addChild(f);
+
+        const f = await new_frame(p);
+        if (f) {
+            const s = Math.min(f.width, f.height) * .65;
+            node.width = node.height = s;
+
+            container.addChild(f);
+        } else {
+            node.setSize(ico.width * .65 * tree.scale);
+        }
     }
 
     async function build_icon_node(container: Container, p: passive_tree_json_node) {
-        const ico = await Assets.load(p.mastery_icon);
+        const ico = load_texture(p.mastery_icon!);
         const node = new Sprite(ico);
         node.anchor.set(0.5);
         const {x, y} = p;
         node.x = x;
         node.y = y;
-        node.alpha = 0.3;
+        node.alpha = 0.35;
+        node.scale = tree.scale;
+
+        subscribeAndRunNow(({selection, pathNodes}) => {
+            const get = selection.get(p.id);
+            node.renderable = get !== undefined;
+        });
 
         container.addChild(node);
     }

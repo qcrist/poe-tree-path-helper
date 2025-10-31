@@ -108,7 +108,7 @@ public class GenDatTypes {
 //                    out.printlnf("public interface DatType {");
 //                    out.printlnf("}");
 
-                    if (obj.getInt("version") != 6)
+                    if (obj.getInt("version") != 7)
                         throw new Error("unexpected schema version: " + obj.getInt("version"));
 
                     JSONArray tables = obj.getJSONArray("tables");

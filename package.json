@@ -8,25 +8,24 @@
         "convert-dds-to-png": "tsx --tsconfig web/esbuild/tsconfig.json web/src/convert_dds_images_to_png.mts"
     },
     "dependencies": {
-        "@fortawesome/free-regular-svg-icons": "^6.5.2",
-        "@fortawesome/free-solid-svg-icons": "^6.5.2",
-        "@fortawesome/react-fontawesome": "^0.2.2",
+        "@fortawesome/free-regular-svg-icons": "^7.1.0",
+        "@fortawesome/free-solid-svg-icons": "^7.1.0",
+        "@fortawesome/react-fontawesome": "^3.1.0",
         "comlink": "^4.4.2",
-        "electron": "^31.2.1",
-        "immer": "^10.1.1",
-        "magickwand.js": "^2.0.1",
-        "pixi.js": "^8.6.3",
-        "react": "^18.3.1",
-        "react-dom": "^18.3.1",
-        "styled-components": "^6.1.11",
+        "immer": "^10.2.0",
+        "jszip": "^3.10.1",
+        "pixi.js": "^8.14.0",
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0",
+        "styled-components": "^6.1.19",
         "ts-node": "^10.9.2",
-        "zustand": "^4.5.4"
+        "zustand": "^5.0.8"
     },
     "devDependencies": {
-        "@types/react-dom": "^18.3.0",
-        "esbuild": "^0.23.0",
+        "@types/react-dom": "^19.2.2",
+        "esbuild": "^0.25.11",
         "esbuild-plugin-wasm": "^1.1.0",
-        "tsx": "^4.19.2",
-        "typescript": "^5.5.3"
+        "tsx": "^4.20.6",
+        "typescript": "^5.9.3"
     }
 }

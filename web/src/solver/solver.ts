@@ -101,7 +101,7 @@ export class TreeSolver {
             const result = await timeAsync(solve_random_2, t => solve_random_2(conn, s, [
                 {acc: 0, cap: 200},
                 {acc: 1, cap: 1000},
-                {acc: 2, cap: 5000}
+                {acc: 2, cap: 10000},
             ], callback, abort, t, solve));
 
             if (!abort.abort) {

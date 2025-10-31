@@ -35,9 +35,9 @@ public class DumpAnnoints {
         TreeSet<Pair<Integer, String>> list = new TreeSet<>();
 
         for (DatTypesV2.BlightCraftingRecipes craft : blightCrafts) {
-            List<DatTypesV2.BlightCraftingItems> parts = craft.BlightCraftingItemsKeys.stream().map(r -> r.lookup(blightCraftingItems)).toList();
-            DatTypesV2.BlightCraftingResults result = craft.BlightCraftingResultsKey.lookup(blightResults);
-            DatTypesV2.PassiveSkills passiveSkill = result.PassiveSkillsKey.lookup(passiveSkills);
+            List<DatTypesV2.BlightCraftingItems> parts = craft.BlightCraftingItems.stream().map(r -> r.lookup(blightCraftingItems)).toList();
+            DatTypesV2.BlightCraftingResults result = craft.BlightCraftingResult.lookup(blightResults);
+            DatTypesV2.PassiveSkills passiveSkill = result.PassiveSkill.lookup(passiveSkills);
             if (passiveSkill == null) continue;
             List<String> text = LoadSkillTree.statsForPassive(passiveSkill, statRenderer, stats);
             int cost = parts.stream().mapToInt(p -> (int) Math.max(1, Math.pow(3, p.Tier - 5))).sum();

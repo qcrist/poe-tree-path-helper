@@ -14,8 +14,8 @@ node_modules
 out
 dist-dev
 
-base_types.json
-base_types.ts
+base_types*.json
+base_types*.ts
 schema.min.json
 
 skill-tree-3.25*.json

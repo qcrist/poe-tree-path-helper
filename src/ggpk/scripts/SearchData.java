@@ -11,13 +11,13 @@ import java.nio.file.Path;
 
 public class SearchData {
     public static void main(String[] args) throws IOException {
-        Path ggpk = Path.of("G:\\Path of Exile 2\\Content.ggpk");
+        Path ggpk = Path.of("G:\\PathofExile\\Content.ggpk");
 
         GGPK gg = new GGPK(ggpk);
 
         System.out.println("index.size() = " + gg.index.size());
 
-        String toFindRaw = "WaystoneTier".toLowerCase();
+        String toFindRaw = "Starfall".toLowerCase();
 //        List<byte[]> toFind = new ArrayList<>();
 //        toFind.add()
 

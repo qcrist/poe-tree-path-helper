@@ -26,7 +26,7 @@ import java.util.stream.Stream;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class DatReader<T extends DatReader.DatType> {
-    private static final Map<String, BiFunction<ByteBuffer, ByteBuffer, DatType>> tableHandlers = new HashMap<>();
+    private static final Map<Class<?>, BiFunction<ByteBuffer, ByteBuffer, DatType>> tableHandlers = new HashMap<>();
 
     private final Class<T> cls;
     private final BiFunction<ByteBuffer, ByteBuffer, DatType> handler;
@@ -108,7 +108,7 @@ public class DatReader<T extends DatReader.DatType> {
         System.out.println("Loading DatTypes...");
         List<Class<? extends DatType>> types = Stream.concat(
                 Stream.of(DatTypesV1.TYPES), Stream.of(DatTypesV2.TYPES)
-        ).flatMap(x -> x.stream()).toList();
+        ).flatMap(Collection::stream).toList();
         for (Class<? extends DatType> type : types) {
             List<FieldHandlerWrapped> handlers = new ArrayList<>();
             for (Field f : type.getFields()) {
@@ -121,7 +121,7 @@ public class DatReader<T extends DatReader.DatType> {
                 }));
             }
             FieldHandlerWrapped[] arr = handlers.toArray(FieldHandlerWrapped[]::new);
-            tableHandlers.put(type.getSimpleName().toLowerCase(), new BiFunction<ByteBuffer, ByteBuffer, DatType>() {
+            var prev = tableHandlers.put(type, new BiFunction<ByteBuffer, ByteBuffer, DatType>() {
                 @Override
                 @SneakyThrows
                 public DatType apply(ByteBuffer row, ByteBuffer ref) {
@@ -132,6 +132,9 @@ public class DatReader<T extends DatReader.DatType> {
                     return o;
                 }
             });
+            if (prev != null){
+                throw new Error("dup handler key!");
+            }
         }
     }
 
@@ -186,7 +189,7 @@ public class DatReader<T extends DatReader.DatType> {
     }
 
     public static <T extends DatType> DatReader<T> forClass(Class<T> cls) {
-        BiFunction<ByteBuffer, ByteBuffer, DatType> handler = tableHandlers.get(cls.getSimpleName().toLowerCase());
+        BiFunction<ByteBuffer, ByteBuffer, DatType> handler = tableHandlers.get(cls);
         return new DatReader<T>(cls, handler);
     }
 

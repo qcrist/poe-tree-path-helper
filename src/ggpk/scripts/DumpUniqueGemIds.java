@@ -20,10 +20,10 @@ public class DumpUniqueGemIds {
 
         PrintStream ps = new PrintStream("binary_wip/unique_gem_ids.txt");
         for (DatTypesV2.SkillGemsForUniqueStat skillGemsForUniqueStat : skillGemsForUniqueStats) {
-            String name = skillGemsForUniqueStat.gems.getFirst().lookup(skillGems).BaseItemTypesKey.lookup(baseItemTypes).Name;
-            double idx_1 = (skillGemsForUniqueStat.id + 1) / 2d;
-            double idx_2 = (skillGemsForUniqueStat.id + 2) / 2d;
-            double idx_3 = (skillGemsForUniqueStat.id + 3) / 2d;
+            String name = skillGemsForUniqueStat.SkillGems.getFirst().lookup(skillGems).BaseItemType.lookup(baseItemTypes).Name;
+            double idx_1 = (skillGemsForUniqueStat.Index + 1) / 2d;
+            double idx_2 = (skillGemsForUniqueStat.Index + 2) / 2d;
+            double idx_3 = (skillGemsForUniqueStat.Index + 3) / 2d;
             ps.printf("gem=%s, 1=%.01f, 2=%.01f, 3=%.01f\n", name, idx_1, idx_2, idx_3);
         }
         ps.close();
