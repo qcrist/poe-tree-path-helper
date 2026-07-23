@@ -23,7 +23,8 @@
             //            "#poe-tree-solver/*": [
             //                "F:\\Projects\\RustRoverProjects\\poe-tree-solver\\pkg\\*"
             //            ]
-        }
+        },
+        "types": ["wicg-file-system-access"]
     },
     "exclude": [
         "node_modules",

@@ -2,6 +2,7 @@ import {Assets, Spritesheet, Texture, TextureSource} from "pixi.js";
 import JSZip from "jszip";
 import {Group, Node, SkillTreeExport} from "#src/ui/passive_tree/ggg_tree_export_types";
 import {SpritesheetData} from "pixi.js/lib/spritesheet/Spritesheet";
+import * as localforage from "localforage";
 
 export type passive_tree_json_node = {
     id: number,
@@ -28,6 +29,10 @@ export type passive_tree_json_node = {
     connections: number[],
     name: string,
     stats: string[],
+    masteryEffects?: {
+        effect: number;
+        stats: string[]
+    }[];
 }
 
 export type raw_frames_t = {
@@ -81,8 +86,7 @@ export type LoadExportZipData = {
 }
 
 function select_tree(){
-    let url = new URL(location.href)
-    url.searchParams
+    let url = new URL(location.href);
 
     return {
         tree_file: url.searchParams.get("tf") ?? "data.json",
@@ -91,16 +95,38 @@ function select_tree(){
 
 }
 
-export async function load_export_zip(): Promise<LoadExportZipData> {
-    const {tree_export, tree_file} = select_tree();
+async function getZipBuffer(){
+    let {tree_export, tree_file} = select_tree();
 
-    let url = `data-exports/${tree_export}.zip`;
-    const resp = await fetch(url);
-    if (!resp.ok) {
-        throw new Error("bad tree load: " + url);
+    const read = await localforage.getItem("upload_tree") as (File | null);
+    let buffer: ArrayBuffer;
+
+    if (read != null){
+        tree_export = read.name.split(".")[0];
+        buffer = await read.arrayBuffer();
+    }else{
+        let url = `data-exports/${tree_export}.zip`;
+        const resp = await fetch(url);
+        if (!resp.ok) {
+            throw new Error("bad tree load: " + url);
+        }
+        console.log("loading zip");
+        buffer = await resp.arrayBuffer();
     }
-    console.log("loading zip");
-    const zip = await JSZip.loadAsync(await resp.arrayBuffer());
+
+
+    return {
+        buffer,
+        tree_export,
+        tree_file
+    };
+}
+
+export async function load_export_zip(): Promise<LoadExportZipData> {
+
+    const {buffer, tree_file, tree_export} = await getZipBuffer();
+
+    const zip = await JSZip.loadAsync(buffer);
 
     const target_tree_json = `${tree_export}/${tree_file}`;
 

@@ -409,9 +409,14 @@ export async function init_tree() {
             store.getState().toggleNode(p.id, SelectionType.BLOCK);
         });
         container.on("mouseenter", e => {
+            let lines = p.stats;
+            if (p.masteryEffects){
+                lines = p.masteryEffects.flatMap(v=>v.stats);
+            }
+
             store.getState().setTooltip({
                 title: p.name,
-                lines: p.stats,
+                lines,
                 ...container.parent!.toGlobal(container.position)
             });
         });
